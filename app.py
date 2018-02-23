@@ -59,23 +59,7 @@ def makeWebhookResult(req):
     
       
   
-    key = sessionID + contextName + '.txt'
-    s3 = boto3.resource('s3')
-    #response = s3.put_object(Bucket='digicoursebot',  Body="json_data",  Key=key   )    
     
-    response = s3.Bucket('digicoursebot').put_object(Key=key, Body="data")
-    
-    client = boto3.client('s3')
-    response = client.list_objects_v2(
-    Bucket='digicoursebot',
-    MaxKeys=1,
-    Prefix=key
-    )
-    
-    if response['KeyCount'] > 0:
-        #print("Exists!")
-    else:
-        #print("Doesn't exist")
 
 
         
@@ -97,9 +81,77 @@ def makeWebhookResult(req):
    
     
     line = ""
-    myobjectx = chapter1()
+    chapterContext = "chapter1"
+    if (chapterContext == "chapter1"):
+        myobjectx = chapter1()
+    if (chapterContext == "chapter2"):
+        myobjectx = chapter2()
+    if (chapterContext == "chapter3"):
+        myobjectx = chapter3()
+    if (chapterContext == "chapter4"):
+        myobjectx = chapter4()
+    if (chapterContext == "chapter5"):
+        myobjectx = chapter5()
+    if (chapterContext == "chapter6"):
+        myobjectx = chapter6()
+    if (chapterContext == "chapter7"):
+        myobjectx = chapter7()
+    if (chapterContext == "chapter8"):
+        myobjectx = chapter8()
+    if (chapterContext == "chapter9"):
+        myobjectx = chapter9()
+    if (chapterContext == "chapter10"):
+        myobjectx = chapter10()
+    if (chapterContext == "chapter11"):
+        myobjectx = chapter11()
+    if (chapterContext == "chapter12"):
+        myobjectx = chapter12()
+    if (chapterContext == "chapter13"):
+        myobjectx = chapter13()
+    if (chapterContext == "chapter14"):
+        myobjectx = chapter14()
+    if (chapterContext == "chapter15"):
+        myobjectx = chapter15()
+    if (chapterContext == "chapter16"):
+        myobjectx = chapter16()
+    if (chapterContext == "chapter17"):
+        myobjectx = chapter17()
+    if (chapterContext == "chapter18"):
+        myobjectx = chapter18()
+    if (chapterContext == "chapter19"):
+        myobjectx = chapter19()
+    if (chapterContext == "chapter20"):
+        myobjectx = chapter20()
+    if (chapterContext == "chapter21"):
+        myobjectx = chapter21()
+    if (chapterContext == "chapter22"):
+        myobjectx = chapter22()
+    if (chapterContext == "chapter23"):
+        myobjectx = chapter23()
+    if (chapterContext == "chapter24"):
+        myobjectx = chapter24()
+    if (chapterContext == "chapter25"):
+        myobjectx = chapter25()
+    if (chapterContext == "chapter26"):
+        myobjectx = chapter26()
+    if (chapterContext == "chapter27"):
+        myobjectx = chapter27()
+    if (chapterContext == "chapter28"):
+        myobjectx = chapter28()
     
-    line = myobjectx.chapter1_1[0]
+    questionnumber =2
+    
+    line= myobjectx.testpaper[testnumber][questionnumber]
+
+    RightAnswer =getAnswer(myobjectx.testpaper[testnumber][questionnumber-1])
+	
+    if ( Respondedanswer ==  RightAnswer):
+        correctIncorrectMessage = "Correct Answer Dude"
+    else:
+         correctIncorrectMessage = "oops"
+        
+    
+    
     words3 = line.split("#")
     QuestionText = words3[1]
     Option1 = words3[2]
@@ -233,29 +285,9 @@ def readLine(file_name,contextName):
             break
     fp.close()
 
-def getAnswer(file_name,contextName):
-    QuestionText = "Sample Question"
-    Option1 ="Option1"
-    Option2 ="Option2"
-    Option3 ="Option3"
-    Option4 ="OPtion3"
-    Answer ="1"
-    fp = open(file_name)
-    for i, line in enumerate(fp):
-        if i == string.replace(string.replace(contextName,"q",""),"Q",""):
-            # 26th line
-            words3 = line.split("#")
-            QuestionText = words3[1]
-            Option1 = words3[2]
-            Option2 = words3[3]
-            Option3 = words3[4]
-            Option4 = words3[5]
-            Answer = words3[6]
-            return Answer
-            #questiontext
-            #answer = words2[3]
-            break
-    fp.close()
+def getAnswer(line):
+    words3 = line.split("#")
+    return words3[6]
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
 

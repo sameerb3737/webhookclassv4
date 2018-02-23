@@ -221,7 +221,7 @@ def makeWebhookResult(req):
       {
          "type":0,
          "platform":"facebook",
-         "speech": correctIncorrectMessage + chapterContext + testpaper + questionnumber
+         "speech": correctIncorrectMessage 
       },
       {
          "type":0,

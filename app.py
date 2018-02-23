@@ -141,6 +141,7 @@ def makeWebhookResult(req):
     
     questionnumber =2
     testnumber =1
+    Respondedanswer  = "1"
 
     
 

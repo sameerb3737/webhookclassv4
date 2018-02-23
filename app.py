@@ -65,8 +65,8 @@ def makeWebhookResult(req):
         
     contexts = result.get("contexts")
     contextName = contexts[0].get("name");
-    questionnumber = string.replace(string.replace(contexts[1].get("name"),"q",""),"Q","")
-    testnumber = string.replace(string.replace(contexts[2].get("name"),"testpaper",""),"TestPaper",""):
+    #questionnumber = string.replace(string.replace(contexts[1].get("name"),"q",""),"Q","")
+    #testnumber = string.replace(string.replace(contexts[2].get("name"),"testpaper",""),"TestPaper",""):
      
     #parameters = result.get("parameters")
     #useranswer = parameters.get("answer")

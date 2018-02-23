@@ -142,10 +142,11 @@ def makeWebhookResult(req):
     questionnumber =2
     testnumber =1
     Respondedanswer  = "1"
+    RightAnswer =1	
 
     
 
-    RightAnswer =getAnswer(myobjectx.testpaper[testnumber][questionnumber-1])
+    #RightAnswer =getAnswer(myobjectx.testpaper[testnumber][questionnumber-1])
 	
     if ( Respondedanswer ==  RightAnswer):
         correctIncorrectMessage = "Correct Answer Dude"
@@ -153,7 +154,8 @@ def makeWebhookResult(req):
          correctIncorrectMessage = "oops"
         
     
-    line= myobjectx.testpaper[testnumber][questionnumber]
+    #line= myobjectx.testpaper[testnumber][questionnumber]
+    line= "15#Question15#Option1#Option2#Option3#Option4#2" 			
     words3 = line.split("#")
     QuestionText = words3[1]
     Option1 = words3[2]

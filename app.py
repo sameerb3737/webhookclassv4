@@ -65,35 +65,7 @@ def makeWebhookResult(req):
     testpaper = 1    
     contexts = result.get("contexts")
     contextName = contexts[0].get("name")
-    if "chapter" in contexts[0].get("name"):
-        if "q" in contexts[1].get("name"):
-            testpaper = contexts[2].get("name")
-	    questionnumber= contexts[1].get("name")
-	    chapterContext= contexts[0].get("name")
-        else:
-            testpaper = contexts[1].get("name")
-	    questionnumber= contexts[2].get("name")
-	    chapterContext= contexts[0].get("name")
 
-    else:
-        if "chapter" in contexts[1].get("name"):
-            if "q" in contexts[0].get("name"):
-                testpaper = contexts[2].get("name")
-	        questionnumber= contexts[0].get("name")
-	        chapterContext= contexts[1].get("name")
-            else:
-                testpaper = contexts[0].get("name")
-	        questionnumber= contexts[2].get("name")
-	        chapterContext= contexts[1].get("name")
-        if "chapter" in contexts[2].get("name"):
-            if "q" in contexts[1].get("name"):
-                testpaper = contexts[0].get("name")
-	        questionnumber= contexts[1].get("name")
-	        chapterContext= contexts[2].get("name")
-            else:
-                testpaper = contexts[1].get("name")
-	        questionnumber= contexts[0].get("name")
-	        chapterContext= contexts[2].get("name")	
 	
     questionnumber = string.replace(string.replace(questionnumber,"q",""),"Q","")
     testpaper = string.replace(string.replace(testpaper,"testpaper",""),"TestPaper",""):

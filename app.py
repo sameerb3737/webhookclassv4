@@ -97,7 +97,7 @@ def makeWebhookResult(req):
 
 
     questionnumber = questionnumber.replace('q','')
-    #testpaper = testpaper.replace(testpaper.replace("testpaper",""),"TestPaper","")
+    testpaper =testpaper.replace('testpaper','')
      
     #parameters = result.get("parameters")
     #useranswer = parameters.get("answer")

@@ -62,9 +62,9 @@ def makeWebhookResult(req):
     
 
 
-        
+    testpaper = 1    
     contexts = result.get("contexts")
-    contextName = contexts[0].get("name");
+    contextName = contexts[0].get("name")
     if "chapter" in contexts[0].get("name"):
         if "q" in contexts[1].get("name"):
             testpaper = contexts[2].get("name")
@@ -81,7 +81,7 @@ def makeWebhookResult(req):
                 testpaper = contexts[2].get("name")
 	        questionnumber= contexts[0].get("name")
 	        chapterContext= contexts[1].get("name")
-        else:
+            else:
                 testpaper = contexts[0].get("name")
 	        questionnumber= contexts[2].get("name")
 	        chapterContext= contexts[1].get("name")
@@ -95,7 +95,7 @@ def makeWebhookResult(req):
 	        questionnumber= contexts[0].get("name")
 	        chapterContext= contexts[2].get("name")	
 	
-    questionnumber = string.replace(string.replace(testpaper,"q",""),"Q","")
+    questionnumber = string.replace(string.replace(questionnumber,"q",""),"Q","")
     testpaper = string.replace(string.replace(testpaper,"testpaper",""),"TestPaper",""):
      
     #parameters = result.get("parameters")

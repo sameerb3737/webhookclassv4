@@ -96,12 +96,8 @@ def makeWebhookResult(req):
                 chapterContext = contexts[2].get('name')
 
 
-
-
-    
-	
-    questionnumber = string.replace(string.replace(questionnumber,"q",""),"Q","")
-    testpaper = string.replace(string.replace(testpaper,"testpaper",""),"TestPaper","")
+    questionnumber = questionnumber.replace(questionnumber.replace("q",""),"Q","")
+    testpaper = testpaper.replace(testpaper.replace("testpaper",""),"TestPaper","")
      
     #parameters = result.get("parameters")
     #useranswer = parameters.get("answer")

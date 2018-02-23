@@ -140,8 +140,9 @@ def makeWebhookResult(req):
         myobjectx = chapter28()
     
     questionnumber =2
+    testnumber =1
+
     
-    line= myobjectx.testpaper[testnumber][questionnumber]
 
     RightAnswer =getAnswer(myobjectx.testpaper[testnumber][questionnumber-1])
 	
@@ -151,7 +152,7 @@ def makeWebhookResult(req):
          correctIncorrectMessage = "oops"
         
     
-    
+    line= myobjectx.testpaper[testnumber][questionnumber]
     words3 = line.split("#")
     QuestionText = words3[1]
     Option1 = words3[2]

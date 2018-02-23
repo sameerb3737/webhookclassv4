@@ -22,7 +22,7 @@ from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 
-import boto3
+
 import json
 import os
 from chapter1 import chapter1
@@ -76,12 +76,12 @@ def makeWebhookResult(req):
     Option3 ="Option3"
     Option4 ="OPtion3"
     
-    folderpath =""
-    corpuspath = ""
-   
+
     
     line = ""
     chapterContext = "chapter1"
+    myobjectx = chapter1()
+    
     if (chapterContext == "chapter1"):
         myobjectx = chapter1()
     if (chapterContext == "chapter2"):
@@ -138,10 +138,11 @@ def makeWebhookResult(req):
         myobjectx = chapter27()
     if (chapterContext == "chapter28"):
         myobjectx = chapter28()
+
     
     questionnumber =2
     testnumber =1
-    Respondedanswer  = "1"
+    Respondedanswer  = 1
     RightAnswer =1	
 
     

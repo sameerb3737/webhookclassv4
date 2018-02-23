@@ -100,8 +100,8 @@ def makeWebhookResult(req):
 
     
 	
-    #questionnumber = string.replace(string.replace(questionnumber,"q",""),"Q","")
-    #testpaper = string.replace(string.replace(testpaper,"testpaper",""),"TestPaper",""):
+    questionnumber = string.replace(string.replace(questionnumber,"q",""),"Q","")
+    testpaper = string.replace(string.replace(testpaper,"testpaper",""),"TestPaper",""):
      
     #parameters = result.get("parameters")
     #useranswer = parameters.get("answer")

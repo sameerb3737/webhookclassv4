@@ -50,22 +50,24 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 
-
+def log(msg):
+    print (msg)
+    sys.stdout.flush()
+	
 def makeWebhookResult(req):
     if req.get("result").get("action") != "shipping.cost":
         return {}
     result = req.get("result")
     sessionID = req.get("sessionId")
     
-    print ("steps")
-    sys.stdout.flush()
+    log('step1')
 
     questionnumber  =1	
     testpaper = 1    
     contexts = result.get("contexts")
     contextName = contexts[0].get("name")
 
-     
+    log('step2')
     #parameters = result.get("parameters")
     #useranswer = parameters.get("answer")
     
@@ -77,6 +79,7 @@ def makeWebhookResult(req):
     Option3 ="Option3"
     Option4 ="OPtion3"
     
+    log('step3')
 
     
     line = ""
@@ -84,12 +87,14 @@ def makeWebhookResult(req):
     myobjectx = chapter1()
     myobjectx = getChapterObject (chapterContext)
     
+    log('step3.1')	
     
     questionnumber =3
     testpaper =1
     Respondedanswer  = 1
     RightAnswer =1	
-
+    
+    log('step4')
     
 
     #RightAnswer =getAnswer(myobjectx.testpaper[testpaper][questionnumber-1])
@@ -99,7 +104,8 @@ def makeWebhookResult(req):
     else:
          correctIncorrectMessage = "oops"
         
-    
+    log('step6')
+
     #line= myobjectx.testpaper[testpaper][questionnumber]
     line= "15#Question15#Option1#Option2#Option3#Option4#2" 			
     words3 = line.split("#")
@@ -115,7 +121,8 @@ def makeWebhookResult(req):
     var7	="          \"speech\": \"Question Text1\"	"
     speech = "HELLO"
     speech1 = var5 + var6  + var7
-
+    
+    log('before response')
     print("Response:")
     print(speech)
      #"contextOut": [],

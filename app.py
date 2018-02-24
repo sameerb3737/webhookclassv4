@@ -66,7 +66,7 @@ def makeWebhookResult(req):
     testpaper = 1
     currentquestion  =1	
     previousquestion =1
-    previousAnswer
+    previousAnswer =1
 
     contexts = result.get("contexts")
     contextName = contexts[0].get("name")

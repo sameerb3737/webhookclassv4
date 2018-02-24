@@ -293,8 +293,7 @@ def getData(contexts):
         currentquestion =  max(questionarray)
         previousquestion = min(questionarray)
     else:
-	previousquestion = min(questionarray)
-    
+        previousquestion = min(questionarray)
     previousAnswer = parameters[0]['answer']    
     d = dict()
     

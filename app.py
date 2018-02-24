@@ -114,7 +114,7 @@ def makeWebhookResult(req):
         if Respondedanswer ==  RightAnswer:
             correctIncorrectMessage = "Great! Correct Answer "
         else:
-            correctIncorrectMessage = "Oops" + "Correct Answer is " + RightAnswer
+            correctIncorrectMessage = "Oops" + "Correct Answer is " + str(RightAnswer)
     log('step6')
     temp1= currentquestion-1
     line= myobjectx.testpaper[testpaper][temp1]

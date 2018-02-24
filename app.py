@@ -106,15 +106,16 @@ def makeWebhookResult(req):
     Respondedanswer  = previousAnswer
     
     
+    difference = currentquestion - previousquestion
     log('step4')
-    if ( currentquestion - previousquestion == 1) and (currentquestion > 1):
-        log('current Q >=2 ')
+    if ( difference == 1) and (currentquestion > 1):
+        log('inside if')
         temp= previousquestion-1
-        RightAnswer =getAnswer(myobjectx.testpaper[testpaper][temp])
+        RightAnswer = getAnswer(myobjectx.testpaper[testpaper][temp])
         if Respondedanswer ==  RightAnswer:
             correctIncorrectMessage = "Great! Correct Answer "
         else:
-            correctIncorrectMessage = "Oops" + "Correct Answer is " + str(RightAnswer)
+            correctIncorrectMessage = "Oops! " + "Correct Answer is " + str(RightAnswer)
     log('step6')
     temp1= currentquestion-1
     line= myobjectx.testpaper[testpaper][temp1]

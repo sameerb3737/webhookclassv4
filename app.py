@@ -115,64 +115,8 @@ def makeWebhookResult(req):
     line = ""
     chapterContext = "chapter1"
     myobjectx = chapter1()
+    myobjectx = getChaperObject (chapterContext)
     
-    if (chapterContext == "chapter1"):
-        myobjectx = chapter1()
-    if (chapterContext == "chapter2"):
-        myobjectx = chapter2()
-    if (chapterContext == "chapter3"):
-        myobjectx = chapter3()
-    if (chapterContext == "chapter4"):
-        myobjectx = chapter4()
-    if (chapterContext == "chapter5"):
-        myobjectx = chapter5()
-    if (chapterContext == "chapter6"):
-        myobjectx = chapter6()
-    if (chapterContext == "chapter7"):
-        myobjectx = chapter7()
-    if (chapterContext == "chapter8"):
-        myobjectx = chapter8()
-    if (chapterContext == "chapter9"):
-        myobjectx = chapter9()
-    if (chapterContext == "chapter10"):
-        myobjectx = chapter10()
-    if (chapterContext == "chapter11"):
-        myobjectx = chapter11()
-    if (chapterContext == "chapter12"):
-        myobjectx = chapter12()
-    if (chapterContext == "chapter13"):
-        myobjectx = chapter13()
-    if (chapterContext == "chapter14"):
-        myobjectx = chapter14()
-    if (chapterContext == "chapter15"):
-        myobjectx = chapter15()
-    if (chapterContext == "chapter16"):
-        myobjectx = chapter16()
-    if (chapterContext == "chapter17"):
-        myobjectx = chapter17()
-    if (chapterContext == "chapter18"):
-        myobjectx = chapter18()
-    if (chapterContext == "chapter19"):
-        myobjectx = chapter19()
-    if (chapterContext == "chapter20"):
-        myobjectx = chapter20()
-    if (chapterContext == "chapter21"):
-        myobjectx = chapter21()
-    if (chapterContext == "chapter22"):
-        myobjectx = chapter22()
-    if (chapterContext == "chapter23"):
-        myobjectx = chapter23()
-    if (chapterContext == "chapter24"):
-        myobjectx = chapter24()
-    if (chapterContext == "chapter25"):
-        myobjectx = chapter25()
-    if (chapterContext == "chapter26"):
-        myobjectx = chapter26()
-    if (chapterContext == "chapter27"):
-        myobjectx = chapter27()
-    if (chapterContext == "chapter28"):
-        myobjectx = chapter28()
-
     
     questionnumber =3
     testpaper =1
@@ -308,6 +252,66 @@ def makeWebhookResult(req):
       }
    ]
 }
+def getChaperObject(chapterConxtext)
+    myobjectx = chapter1()
+    if (chapterContext == "chapter1"):
+        myobjectx = chapter1()
+    if (chapterContext == "chapter2"):
+        myobjectx = chapter2()
+    if (chapterContext == "chapter3"):
+        myobjectx = chapter3()
+    if (chapterContext == "chapter4"):
+        myobjectx = chapter4()
+    if (chapterContext == "chapter5"):
+        myobjectx = chapter5()
+    if (chapterContext == "chapter6"):
+        myobjectx = chapter6()
+    if (chapterContext == "chapter7"):
+        myobjectx = chapter7()
+    if (chapterContext == "chapter8"):
+        myobjectx = chapter8()
+    if (chapterContext == "chapter9"):
+        myobjectx = chapter9()
+    if (chapterContext == "chapter10"):
+        myobjectx = chapter10()
+    if (chapterContext == "chapter11"):
+        myobjectx = chapter11()
+    if (chapterContext == "chapter12"):
+        myobjectx = chapter12()
+    if (chapterContext == "chapter13"):
+        myobjectx = chapter13()
+    if (chapterContext == "chapter14"):
+        myobjectx = chapter14()
+    if (chapterContext == "chapter15"):
+        myobjectx = chapter15()
+    if (chapterContext == "chapter16"):
+        myobjectx = chapter16()
+    if (chapterContext == "chapter17"):
+        myobjectx = chapter17()
+    if (chapterContext == "chapter18"):
+        myobjectx = chapter18()
+    if (chapterContext == "chapter19"):
+        myobjectx = chapter19()
+    if (chapterContext == "chapter20"):
+        myobjectx = chapter20()
+    if (chapterContext == "chapter21"):
+        myobjectx = chapter21()
+    if (chapterContext == "chapter22"):
+        myobjectx = chapter22()
+    if (chapterContext == "chapter23"):
+        myobjectx = chapter23()
+    if (chapterContext == "chapter24"):
+        myobjectx = chapter24()
+    if (chapterContext == "chapter25"):
+        myobjectx = chapter25()
+    if (chapterContext == "chapter26"):
+        myobjectx = chapter26()
+    if (chapterContext == "chapter27"):
+        myobjectx = chapter27()
+    if (chapterContext == "chapter28"):
+        myobjectx = chapter28()
+
+    return objectx
 
 def random_line(fname):
     lines = open(fname).read().splitlines()

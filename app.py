@@ -100,12 +100,9 @@ def makeWebhookResult(req):
     myobjectx = chapter1()
     myobjectx = getChapterObject(chapternumber)
     
-    log('step3.1')	
-    
-
+    log('step3.1')
     Respondedanswer  = previousAnswer
-    
-    
+    difference = 0
     difference = currentquestion - previousquestion
     log('step4')
     if ( difference == 1) and (currentquestion > 1):

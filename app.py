@@ -107,14 +107,14 @@ def makeWebhookResult(req):
 	
     
     log('step4')
-    
-    if (( currentquestion - previousquestion) == 1) and currentquestion > 1 :
+    if (( currentquestion - previousquestion) == 1) and currentquestion > 1:
         RightAnswer =getAnswer(myobjectx.testpaper[testpaper][previousquestion-1])
 	if Respondedanswer ==  RightAnswer:
 	    correctIncorrectMessage = "Great! Correct Answer "
 	else:
 	    correctIncorrectMessage = "Oops" + "Correct Answer is " + RightAnswer
-        
+	
+            
     log('step6')
 
     line= myobjectx.testpaper[testpaper][currentquestion-1]

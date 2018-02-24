@@ -56,7 +56,6 @@ def makeWebhookResult(req):
         return {}
     result = req.get("result")
     sessionID = req.get("sessionId")
-       
 
     questionnumber  =1	
     testpaper = 1    
@@ -80,7 +79,7 @@ def makeWebhookResult(req):
     line = ""
     chapterContext = "chapter1"
     myobjectx = chapter1()
-    myobjectx = getChaperObject (chapterContext)
+    myobjectx = getChapterObject (chapterContext)
     
     
     questionnumber =3
@@ -98,8 +97,8 @@ def makeWebhookResult(req):
          correctIncorrectMessage = "oops"
         
     
-    line= myobjectx.testpaper[testpaper][questionnumber]
-    #line= "15#Question15#Option1#Option2#Option3#Option4#2" 			
+    #line= myobjectx.testpaper[testpaper][questionnumber]
+    line= "15#Question15#Option1#Option2#Option3#Option4#2" 			
     words3 = line.split("#")
     QuestionText = words3[1]
     Option1 = words3[2]
@@ -217,7 +216,7 @@ def makeWebhookResult(req):
       }
    ]
 }
-def getChaperObject(chapterConxtext):
+def getChapterObject(chapterConxtext):
     myobjectx = chapter1()
     if (chapterContext == "chapter1"):
         myobjectx = chapter1()

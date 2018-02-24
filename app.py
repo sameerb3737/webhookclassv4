@@ -68,6 +68,9 @@ def makeWebhookResult(req):
     contextName = contexts[0].get("name")
 
     log('step2')
+    a = list()
+    a = getData(contexts)
+    
     #parameters = result.get("parameters")
     #useranswer = parameters.get("answer")
     

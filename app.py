@@ -74,7 +74,7 @@ def makeWebhookResult(req):
     log('step2')
     a = list()
     a = getData(contexts)
-
+    print (a)
     chapternumber =a['chapternumber']
     testpaper =a['testpaper']
     currentquestion =a['currentquestion']
@@ -105,12 +105,7 @@ def makeWebhookResult(req):
 
     Respondedanswer  = previousAnswer
     
-    print(chapternumber)
-    print(testpaper)
-    print(currentquestion)
-    print(previousquestion)
-    print(previousAnswer)
-
+    
     log('step4')
     if (( currentquestion - previousquestion) == 1) and currentquestion > 1:
         temp= previousquestion-1
@@ -298,8 +293,7 @@ def getData(contexts):
         currentquestion =  max(questionarray)
         previousquestion = min(questionarray)
     else:
-        currentquestion =  max(questionarray)
-        previousquestion = min(questionarray)
+	previousquestion = min(questionarray)
     
     previousAnswer = parameters[0]['answer']    
     d = dict()

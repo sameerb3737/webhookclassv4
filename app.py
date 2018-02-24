@@ -61,15 +61,25 @@ def makeWebhookResult(req):
     sessionID = req.get("sessionId")
     
     log('step1')
+    
+    chapternumber =1
+    testpaper = 1
+    currentquestion  =1	
+    previousquestion =1
+    previousAnswer
 
-    questionnumber  =1	
-    testpaper = 1    
     contexts = result.get("contexts")
     contextName = contexts[0].get("name")
 
     log('step2')
     a = list()
     a = getData(contexts)
+
+    chapternumber =a['chapternumber']
+    testpaper =a['testpaper']
+    currentquestion =a['currentquestion']
+    previousquestion =a['previousquestion']
+    previousAnswer =a['previousAnswer']
     
     #parameters = result.get("parameters")
     #useranswer = parameters.get("answer")
@@ -88,28 +98,26 @@ def makeWebhookResult(req):
     line = ""
     chapterContext = "chapter1"
     myobjectx = chapter1()
-    myobjectx = getChapterObject(chapterContext)
+    myobjectx = getChapterObject(chapternumber)
     
     log('step3.1')	
     
-    questionnumber =3
-    testpaper =1
-    Respondedanswer  = 1
-    RightAnswer =1	
+
+    Respondedanswer  = previousAnswer
+	
     
     log('step4')
     
-
-    RightAnswer =getAnswer(myobjectx.testpaper[testpaper][questionnumber-1])
-	
-    if ( Respondedanswer ==  RightAnswer):
-        correctIncorrectMessage = "Correct Answer Dude"
-    else:
-         correctIncorrectMessage = "oops"
+    if (( currentquestion - previousquestion) == 1) and currentquestion >1 :
+        RightAnswer =getAnswer(myobjectx.testpaper[testpaper][previousquestion-1])
+	if ( Respondedanswer ==  RightAnswer):
+            correctIncorrectMessage = "Great! Correct Answer "
+	else:
+	    correctIncorrectMessage = "Oops" + "Correct Answer is " + RightAnswer
         
     log('step6')
 
-    line= myobjectx.testpaper[testpaper][questionnumber]
+    line= myobjectx.testpaper[testpaper][currentquestion-1]
     #line= "15#Question15#Option1#Option2#Option3#Option4#2" 			
     words3 = line.split("#")
     QuestionText = words3[1]
@@ -299,61 +307,61 @@ def getData(contexts):
 
 def getChapterObject(chapterContext):
     myobjectx = chapter1()
-    if (chapterContext == "chapter1"):
+    if (chapterContext ==  1):
         myobjectx = chapter1()
-    if (chapterContext == "chapter2"):
+    if (chapterContext ==  2):
         myobjectx = chapter2()
-    if (chapterContext == "chapter3"):
+    if (chapterContext ==  3):
         myobjectx = chapter3()
-    if (chapterContext == "chapter4"):
+    if (chapterContext ==  4):
         myobjectx = chapter4()
-    if (chapterContext == "chapter5"):
+    if (chapterContext ==  5):
         myobjectx = chapter5()
-    if (chapterContext == "chapter6"):
+    if (chapterContext ==  6):
         myobjectx = chapter6()
-    if (chapterContext == "chapter7"):
+    if (chapterContext ==  7):
         myobjectx = chapter7()
-    if (chapterContext == "chapter8"):
+    if (chapterContext ==  8):
         myobjectx = chapter8()
-    if (chapterContext == "chapter9"):
+    if (chapterContext ==  9):
         myobjectx = chapter9()
-    if (chapterContext == "chapter10"):
+    if (chapterContext ==  10):
         myobjectx = chapter10()
-    if (chapterContext == "chapter11"):
+    if (chapterContext ==  11):
         myobjectx = chapter11()
-    if (chapterContext == "chapter12"):
+    if (chapterContext ==  12):
         myobjectx = chapter12()
-    if (chapterContext == "chapter13"):
+    if (chapterContext ==  13):
         myobjectx = chapter13()
-    if (chapterContext == "chapter14"):
+    if (chapterContext ==  14):
         myobjectx = chapter14()
-    if (chapterContext == "chapter15"):
+    if (chapterContext ==  15):
         myobjectx = chapter15()
-    if (chapterContext == "chapter16"):
+    if (chapterContext ==  16):
         myobjectx = chapter16()
-    if (chapterContext == "chapter17"):
+    if (chapterContext ==  17):
         myobjectx = chapter17()
-    if (chapterContext == "chapter18"):
+    if (chapterContext ==  18):
         myobjectx = chapter18()
-    if (chapterContext == "chapter19"):
+    if (chapterContext ==  19):
         myobjectx = chapter19()
-    if (chapterContext == "chapter20"):
+    if (chapterContext ==  20):
         myobjectx = chapter20()
-    if (chapterContext == "chapter21"):
+    if (chapterContext ==  21):
         myobjectx = chapter21()
-    if (chapterContext == "chapter22"):
+    if (chapterContext ==  22):
         myobjectx = chapter22()
-    if (chapterContext == "chapter23"):
+    if (chapterContext ==  23):
         myobjectx = chapter23()
-    if (chapterContext == "chapter24"):
+    if (chapterContext ==  24):
         myobjectx = chapter24()
-    if (chapterContext == "chapter25"):
+    if (chapterContext ==  25):
         myobjectx = chapter25()
-    if (chapterContext == "chapter26"):
+    if (chapterContext ==  26):
         myobjectx = chapter26()
-    if (chapterContext == "chapter27"):
+    if (chapterContext ==  27):
         myobjectx = chapter27()
-    if (chapterContext == "chapter28"):
+    if (chapterContext ==  28):
         myobjectx = chapter28()
 
     return myobjectx

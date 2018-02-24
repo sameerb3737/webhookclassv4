@@ -85,7 +85,7 @@ def makeWebhookResult(req):
     line = ""
     chapterContext = "chapter1"
     myobjectx = chapter1()
-    myobjectx = getChapterObject (chapterContext)
+    myobjectx = getChapterObject(chapterContext)
     
     log('step3.1')	
     
@@ -97,7 +97,7 @@ def makeWebhookResult(req):
     log('step4')
     
 
-    #RightAnswer =getAnswer(myobjectx.testpaper[testpaper][questionnumber-1])
+    RightAnswer =getAnswer(myobjectx.testpaper[testpaper][questionnumber-1])
 	
     if ( Respondedanswer ==  RightAnswer):
         correctIncorrectMessage = "Correct Answer Dude"
@@ -106,8 +106,8 @@ def makeWebhookResult(req):
         
     log('step6')
 
-    #line= myobjectx.testpaper[testpaper][questionnumber]
-    line= "15#Question15#Option1#Option2#Option3#Option4#2" 			
+    line= myobjectx.testpaper[testpaper][questionnumber]
+    #line= "15#Question15#Option1#Option2#Option3#Option4#2" 			
     words3 = line.split("#")
     QuestionText = words3[1]
     Option1 = words3[2]
@@ -226,7 +226,7 @@ def makeWebhookResult(req):
       }
    ]
 }
-def getChapterObject(chapterConxtext):
+def getChapterObject(chapterContext):
     myobjectx = chapter1()
     if (chapterContext == "chapter1"):
         myobjectx = chapter1()

@@ -252,7 +252,7 @@ def makeWebhookResult(req):
       }
    ]
 }
-def getChaperObject(chapterConxtext)
+def getChaperObject(chapterConxtext):
     myobjectx = chapter1()
     if (chapterContext == "chapter1"):
         myobjectx = chapter1()
@@ -311,8 +311,46 @@ def getChaperObject(chapterConxtext)
     if (chapterContext == "chapter28"):
         myobjectx = chapter28()
 
-    return objectx
+    return myobjectx
 
+def getContextParameters(contexts):
+    parameters = [1,2,3,4]
+    if len(contexts) == 3:
+	if 'chapter' in contexts[0].get('name'):
+            if 'q' in contexts[1].get('name'):
+                testpaper = contexts[2].get('name')
+                questionnumber = contexts[1].get('name')
+                chapterContext = contexts[0].get('name')
+            else:
+                testpaper = contexts[1].get('name')
+                questionnumber = contexts[2].get('name')
+                chapterContext = contexts[0].get('name')
+        else:
+    
+            if 'chapter' in contexts[1].get('name'):
+                if 'q' in contexts[0].get('name'):
+                    testpaper = contexts[2].get('name')
+                    questionnumber = contexts[0].get('name')
+                    chapterContext = contexts[1].get('name')
+                else:
+                    testpaper = contexts[0].get('name')
+                    questionnumber = contexts[2].get('name')
+                    chapterContext = contexts[1].get('name')
+            if 'chapter' in contexts[2].get('name'):
+                if 'q' in contexts[1].get('name'):
+                    testpaper = contexts[0].get('name')
+                    questionnumber = contexts[1].get('name')
+                    chapterContext = contexts[2].get('name')
+                else:
+                    testpaper = contexts[1].get('name')
+                    questionnumber = contexts[0].get('name')
+                    chapterContext = contexts[2].get('name')
+
+    if len(contexts) == 4:
+	
+	
+    return parameters
+	
 def random_line(fname):
     lines = open(fname).read().splitlines()
     return random.choice(lines)

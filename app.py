@@ -22,7 +22,7 @@ from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 
-
+import sys
 import json
 import os
 from chapter1 import chapter1
@@ -56,6 +56,9 @@ def makeWebhookResult(req):
         return {}
     result = req.get("result")
     sessionID = req.get("sessionId")
+    
+    print ("steps")
+    sys.stdout.flush()
 
     questionnumber  =1	
     testpaper = 1    

@@ -312,6 +312,73 @@ def getChaperObject(chapterConxtext):
         myobjectx = chapter28()
 
     return myobjectx
+def getData(contexts):
+    contextnames =list();
+    lifespan =list();
+    parameters=list();
+    
+    for i in range(len(contexts)):
+        input = contexts[i]
+        all_keys = input.keys()
+        
+        
+        for key in  all_keys:
+            
+            if isinstance(input[key],str):
+                
+                contextnames.append(input[key])
+            else:
+                if isinstance(input[key],int):
+                    lifespan.append(input[key])
+                else:
+                    parameters.append( input[key])
+                    
+    
+            
+    chapternumber =1
+    testpaper =1
+    currentquestion=1
+    previousquestion=0
+    previousAnswer =1
+    
+    print (contextnames)
+    print (lifespan)
+    print (parameters[0]['answer'])
+    questionarray=[0,0]
+    c=0
+    for x in range(len(contextnames)):
+    
+        if 'chapter' in contextnames[x] and lifespan[x] ==5:
+            chapternumber= contextnames[x].replace('chapter','')
+        if 'testpaper' in contextnames[x] and lifespan[x] ==5:
+            testpaper = contextnames[x].replace('testpaper','')
+        if len(contextnames) ==3 and 'q' in contextnames[x] and lifespan[x] ==5:
+            currentquestion = contextnames[x].replace('q','')
+        
+        if len(contextnames) ==4 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
+            
+            questionarray[c] = contextnames[x].replace('q','')
+            c= c+1
+            
+    
+    
+    if len(contextnames) == 4:
+        currentquestion =  max(questionarray)
+        previousquestion = min(questionarray)
+    else:
+        currentquestion =  max(questionarray)
+        previousquestion = min(questionarray)
+    
+    previousAnswer = parameters[0]['answer']    
+    d = dict()
+    
+    d['chapternumber'] =chapternumber
+    d['testpaper'] =testpaper
+    d['currentquestion'] =currentquestion
+    d['previousquestion'] =previousquestion
+    d['previousAnswer'] =previousAnswer
+    
+    return d
 
 def getContextParameters(contexts):
     parameters = [1,2,3,4]

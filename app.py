@@ -294,11 +294,11 @@ def getData(contexts):
     previousAnswer = parameters[0]['answer']    
     d = dict()
     
-    d['chapternumber'] =chapternumber
-    d['testpaper'] =testpaper
-    d['currentquestion'] =currentquestion
-    d['previousquestion'] =previousquestion
-    d['previousAnswer'] =previousAnswer
+    d['chapternumber'] =int(chapternumber)
+    d['testpaper'] =int(testpaper)
+    d['currentquestion'] =int(currentquestion)
+    d['previousquestion'] =int(previousquestion)
+    d['previousAnswer'] =int(previousAnswer)
     
     return d
 

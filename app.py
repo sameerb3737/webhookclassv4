@@ -141,11 +141,11 @@ def makeWebhookResult(req):
    
    "speech":"",
    "messages":[
-      {
-         "type":3,
-         "platform":"facebook",
-         "imageUrl":"http://charityrefresh.org/ella/asset.hello-ella.gif"
-      },
+      #{
+      #   "type":3,
+      #   "platform":"facebook",
+      #   "imageUrl":"http://charityrefresh.org/ella/asset.hello-ella.gif"
+      #},
       {
          "type":0,
          "platform":"facebook",
@@ -177,24 +177,9 @@ def makeWebhookResult(req):
          "speech":Option4
       },
       {
-         "type":0,
-         "platform":"facebook",
-         "speech":"My Second Responsedd " 
-      },
-      {
-         "type":0,
-         "platform":"facebook",
-         "speech":sessionID
-      },
-        {
-         "type":0,
-         "platform":"facebook",
-         "speech":contextName
-      },
-       {
           "type": 2,
           "platform": "facebook",
-          "title": "What can I help you with",
+          "title": "Choose the Right Answer",
           "replies": [
             "1",
             "2",
@@ -203,37 +188,48 @@ def makeWebhookResult(req):
           ]
      },
       {
-         "type":4,
-         "platform":"facebook",
-         "payload":{
-            "facebook":{
-               "attachment":{
-                  "type":"template",
-                  "payload":{
-                     "template_type":"button",
-                     "text":"What can I help you with?",
-                     "buttons":[
-                        {
-                           "type":"postback",
-                           "title":"Answer A",
-                           "payload":"A"
-                        },
-                        {
-                           "type":"postback",
-                           "title":"Answer B",
-                           "payload":"B"
-                        },
-                        {
-                           "type":"postback",
-                           "title":"Answer C",
-                           "payload":"C"
-                        }
-                     ]
-                  }
-               }
-            }
-         }
-      }
+         "type":0,
+         "platform":"slack",
+         "speech": correctIncorrectMessage 
+      },
+      {
+         "type":0,
+         "platform":"slack",
+         "speech":QuestionText 
+      },
+      {
+         "type":0,
+         "platform":"slack",
+         "speech":Option1
+      },
+      {
+         "type":0,
+         "platform":"slack",
+         "speech":Option2
+      },
+      {
+         "type":0,
+         "platform":"slack",
+         "speech":Option3
+      },
+      {
+         "type":0,
+         "platform":"slack",
+         "speech":Option4
+      },
+      {
+          "type": 2,
+          "platform": "slack",
+          "title": "Choose the Right Answer",
+          "replies": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+     }
+
+
    ]
 }
 def getData(contexts):
@@ -291,7 +287,10 @@ def getData(contexts):
         previousquestion = min(questionarray)
     else:
         previousquestion = min(questionarray)
-    previousAnswer = parameters[0]['answer']    
+    try:
+        previousAnswer = parameters[0]['answer']
+    except:
+        previousAnswer = 0
     d = dict()
     
     d['chapternumber'] =int(chapternumber)

@@ -412,6 +412,265 @@ def readLine(file_name,contextName):
             #answer = words2[3]
             break
     fp.close()
+def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4):
+    return {
+   "speech":"",
+   "messages":[
+      #{
+      #   "type":3,
+      #   "platform":"facebook",
+      #   "imageUrl":"http://charityrefresh.org/ella/asset.hello-ella.gif"
+      #},
+      {
+         "type":0,
+         "platform":"facebook",
+         "speech": correctIncorrectMessage 
+      },
+      {
+         "type":0,
+         "platform":"facebook",
+         "speech":QuestionText 
+      },
+      {
+         "type":0,
+         "platform":"facebook",
+         "speech":Option1
+      },
+      {
+         "type":0,
+         "platform":"facebook",
+         "speech":Option2
+      },
+      {
+         "type":0,
+         "platform":"facebook",
+         "speech":Option3
+      },
+      {
+         "type":0,
+         "platform":"facebook",
+         "speech":Option4
+      },
+      {
+          "type": 2,
+          "platform": "facebook",
+          "title": "Choose the Right Answer",
+          "replies": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+     },
+      {
+         "type":0,
+         "platform":"slack",
+         "speech": correctIncorrectMessage 
+      },
+      {
+         "type":0,
+         "platform":"slack",
+         "speech":QuestionText 
+      },
+      {
+         "type":0,
+         "platform":"slack",
+         "speech":Option1
+      },
+      {
+         "type":0,
+         "platform":"slack",
+         "speech":Option2
+      },
+      {
+         "type":0,
+         "platform":"slack",
+         "speech":Option3
+      },
+      {
+         "type":0,
+         "platform":"slack",
+         "speech":Option4
+      },
+      {
+          "type": 2,
+          "platform": "slack",
+          "title": "Choose the Right Answer",
+          "replies": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+     },
+      {
+         "type":0,
+         "platform":"skype",
+         "speech": correctIncorrectMessage 
+      },
+      {
+         "type":0,
+         "platform":"skype",
+         "speech":QuestionText 
+      },
+      {
+         "type":0,
+         "platform":"skype",
+         "speech":Option1
+      },
+      {
+         "type":0,
+         "platform":"skype",
+         "speech":Option2
+      },
+      {
+         "type":0,
+         "platform":"skype",
+         "speech":Option3
+      },
+      {
+         "type":0,
+         "platform":"skype",
+         "speech":Option4
+      },
+      {
+          "type": 2,
+          "platform": "skype",
+          "title": "Choose the Right Answer",
+          "replies": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+     },
+      {
+         "type":0,
+         "platform":"viber",
+         "speech": correctIncorrectMessage 
+      },
+      {
+         "type":0,
+         "platform":"viber",
+         "speech":QuestionText 
+      },
+      {
+         "type":0,
+         "platform":"viber",
+         "speech":Option1
+      },
+      {
+         "type":0,
+         "platform":"viber",
+         "speech":Option2
+      },
+      {
+         "type":0,
+         "platform":"viber",
+         "speech":Option3
+      },
+      {
+         "type":0,
+         "platform":"viber",
+         "speech":Option4
+      },
+      {
+          "type": 2,
+          "platform": "viber",
+          "title": "Choose the Right Answer",
+          "replies": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+     },
+      {
+         "type":0,
+         "platform":"kik",
+         "speech": correctIncorrectMessage 
+      },
+      {
+         "type":0,
+         "platform":"kik",
+         "speech":QuestionText 
+      },
+      {
+         "type":0,
+         "platform":"kik",
+         "speech":Option1
+      },
+      {
+         "type":0,
+         "platform":"kik",
+         "speech":Option2
+      },
+      {
+         "type":0,
+         "platform":"kik",
+         "speech":Option3
+      },
+      {
+         "type":0,
+         "platform":"kik",
+         "speech":Option4
+      },
+      {
+          "type": 2,
+          "platform": "kik",
+          "title": "Choose the Right Answer",
+          "replies": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+     },
+      {
+         "type":0,
+         "platform":"telegram",
+         "speech": correctIncorrectMessage 
+      },
+      {
+         "type":0,
+         "platform":"telegram",
+         "speech":QuestionText 
+      },
+      {
+         "type":0,
+         "platform":"telegram",
+         "speech":Option1
+      },
+      {
+         "type":0,
+         "platform":"telegram",
+         "speech":Option2
+      },
+      {
+         "type":0,
+         "platform":"telegram",
+         "speech":Option3
+      },
+      {
+         "type":0,
+         "platform":"telegram",
+         "speech":Option4
+      },
+      {
+          "type": 2,
+          "platform": "telegram",
+          "title": "Choose the Right Answer",
+          "replies": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+     }
+
+
+   ]
+}
 
 def getAnswer(line):
     words3 = line.split("#")

@@ -114,6 +114,8 @@ def makeWebhookResult(req):
         else:
             correctIncorrectMessage = "Oops! " + "Correct Answer is " + str(RightAnswer)
     log('step6')
+    if ( currentquestion > 30):
+        return FinalMessage(correctIncorrectMessage)
     temp1= currentquestion-1
     line= myobjectx.testpaper[testpaper][temp1]
     log('step7')
@@ -232,6 +234,37 @@ def makeWebhookResult(req):
 
    ]
 }
+def FinalMessage(correctIncorrectMessage):
+    return
+    {
+   "speech":"",
+   "messages":[
+      #{
+      #   "type":3,
+      #   "platform":"facebook",
+      #   "imageUrl":"http://charityrefresh.org/ella/asset.hello-ella.gif"
+      #},
+      {
+         "type":0,
+         "platform":"facebook",
+         "speech": correctIncorrectMessage 
+      },
+      {
+         "type":0,
+         "platform":"facebook",
+         "speech":"You had reach end of test" 
+      },
+      {
+          "type": 2,
+          "platform": "facebook",
+          "title": "Do you want to Try some more test?",
+          "replies": [
+            "Goback",
+            "Exit"
+            
+          ]
+     }
+    }
 def getData(contexts):
     contextnames =list();
     lifespan =list();

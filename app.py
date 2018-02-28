@@ -73,8 +73,10 @@ def makeWebhookResult(req):
 
     log('step2')
     a = list()
-    a = getData(contexts)
+    a = getData2(contexts)
     print (a)
+    class = a['class']
+    subject = a['subject']
     chapternumber =a['chapternumber']
     testpaper =a['testpaper']
     currentquestion =a['currentquestion']
@@ -98,7 +100,7 @@ def makeWebhookResult(req):
     line = ""
     chapterContext = "chapter1"
     myobjectx = chapter1()
-    myobjectx = getChapterObject(chapternumber)
+    myobjectx = getChapterObject2(class,subject,chapternumber)
     
     log('step3.1')
     Respondedanswer  = previousAnswer

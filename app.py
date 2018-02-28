@@ -315,7 +315,11 @@ def getData2(contexts):
     d['previousAnswer'] = int(previousAnswer)
     
     return d
-
+def getChapterObject2(class,subject,chapter):
+    classname = 'class' + class + 'subject' + subject +'chapter' + chapter
+    obj = globals()[classname]()
+    return obj
+	
 def getChapterObject(chapterContext):
     myobjectx = chapter1()
     if (chapterContext ==  1):

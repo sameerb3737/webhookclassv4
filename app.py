@@ -319,6 +319,7 @@ def getData2(contexts):
     return d
 def getChapterObject2(class,subject,chapter):
     classname = 'class' + class + 'subject' + subject +'chapter' + chapter
+    classname = 'chapter1'
     obj = globals()[classname]()
     return obj
 	

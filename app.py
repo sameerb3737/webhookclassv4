@@ -326,7 +326,8 @@ def getData2(contexts):
     
     return d
 def getChapterObject2(classnumber,subject,chapter):
-    classname = 'class' + classnumber + 'subject' + subject +'chapter' + chapter
+    classname=''
+    classname = 'class' + str(classnumber) + 'subject' + subject +'chapter' + str(chapter)
     classname = 'chapter1'
     obj  = chapter1()
     try:

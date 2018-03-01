@@ -309,7 +309,10 @@ def getData2(contexts):
     print('before dict')       
     marks = 0
     try:
-        marks = int(parameters[1]['marks'])
+        if len(contextnames) == 2:
+            marks = int(parameters[0]['marks'])
+        else:
+            marks =0
     except:
         marks = 0
     d = dict()

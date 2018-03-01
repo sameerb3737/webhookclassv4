@@ -113,7 +113,7 @@ def makeWebhookResult(req):
         log('inside if')
         temp= previousquestion-1
         print(Respondedanswer)
-	print(RightAnswer)
+        print(RightAnswer)
         RightAnswer = getAnswer(myobjectx.testpaper[testpaper][temp])
         if Respondedanswer ==  RightAnswer:
             marks =marks+1

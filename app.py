@@ -82,7 +82,7 @@ def makeWebhookResult(req):
     testpaper =a['testpaper']
     currentquestion =a['currentquestion']
     previousquestion =a['previousquestion']
-    previousAnswer =a['previousAnswer']
+    previousAnswer =int(a['previousAnswer'])
     marks = a['marks']
     #parameters = result.get("parameters")
     #useranswer = parameters.get("answer")

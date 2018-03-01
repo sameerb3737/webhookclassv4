@@ -417,6 +417,7 @@ def readLine(file_name,contextName):
 def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4):
     print('inside response function')
     return {
+    "contextOut": [],	    
    "speech":"",
    "messages":[
       #{

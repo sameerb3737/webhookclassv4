@@ -98,8 +98,9 @@ def makeWebhookResult(req):
 
     
     line = ""
-    chapterContext = "chapter1"
+    #chapterContext = "chapter1"
     myobjectx = chapter1()
+    log('before getChapterObject2')
     myobjectx = getChapterObject2(classnumber,subject,chapternumber)
     
     log('step3.1')

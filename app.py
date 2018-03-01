@@ -145,7 +145,7 @@ def makeWebhookResult(req):
     #"contextOut": [],
     #print(str(sessionID) + "#" + str(chapternumber) + "#" + str(testpaper) + "#" + previousquestion + "#" + correctIncorrectMessage)
     print(correctIncorrectMessage + "#" + str(QuestionText) + "#" + str(Option1) + "#" + Option2 + "#" + Option3)
-    return ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,previousquestion,marks)
+    return ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,marks)
 
 def FinalMessage(correctIncorrectMessage):
     return

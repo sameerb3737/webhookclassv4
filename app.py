@@ -277,6 +277,7 @@ def getData2(contexts):
     
     print (contextnames)
     print (lifespan)
+    print(parameters)
     questionarray=[0,0]
     c=0
     for x in range(len(contextnames)):
@@ -285,12 +286,12 @@ def getData2(contexts):
             chapternumber= contextnames[x].replace('chapter','')
         if 'testpaper' in contextnames[x] and lifespan[x] ==5:
             testpaper = contextnames[x].replace('testpaper','')
-        if len(contextnames) ==1 and 'q' in contextnames[x] and lifespan[x] ==5:
-            currentquestion = contextnames[x].replace('q','')
+        if len(contextnames) ==1 and 'Q' in contextnames[x] and lifespan[x] ==5:
+            currentquestion = contextnames[x].replace('Q','')
         
-        if len(contextnames) ==2 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
+        if len(contextnames) ==2 and 'Q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
             
-            questionarray[c] = contextnames[x].replace('q','')
+            questionarray[c] = contextnames[x].replace('Q','')
             c= c+1
             
     
@@ -298,22 +299,29 @@ def getData2(contexts):
     if len(contextnames) == 2:
         currentquestion =  max(questionarray)
         previousquestion = min(questionarray)
+        previousAnswer = parameters[1]['answer']
     else:
         previousquestion = min(questionarray)
-    try:
-        previousAnswer = parameters[1]['answer']
-    except:
         previousAnswer = 0
+    print(before dict)       
 
     d = dict()
-    d['class'] =int(parameters[1]['class'])
-    d['subject'] =parameters[1]['subject']		
-    d['chapternumber'] =int(parameters[1]['chapter'])
-    d['testpaper'] =int(parameters[1]['testpaper'])
-
-    d['currentquestion'] =int(currentquestion)
-    d['previousquestion'] =int(previousquestion)
-    d['previousAnswer'] = int(previousAnswer)
+    if len(contextnames) == 2:
+        d['class'] =int(parameters[1]['class'])
+        d['subject'] =parameters[1]['subject']		
+        d['chapternumber'] =int(parameters[1]['chapter'])
+        d['testpaper'] =int(parameters[1]['testpaper'])
+        d['currentquestion'] =int(currentquestion)
+        d['previousquestion'] =int(previousquestion)
+        d['previousAnswer'] = int(previousAnswer)
+    if len(contextnames) == 1:
+        d['class'] =int(parameters[0]['class'])
+        d['subject'] =parameters[0]['subject']		
+        d['chapternumber'] =int(parameters[0]['chapter'])
+        d['testpaper'] =int(parameters[0]['testpaper'])
+        d['currentquestion'] =int(currentquestion)
+        d['previousquestion'] =int(previousquestion)
+        d['previousAnswer'] = int(previousAnswer)
     
     return d
 def getChapterObject2(classnumber,subject,chapter):

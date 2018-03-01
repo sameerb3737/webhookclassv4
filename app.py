@@ -75,6 +75,7 @@ def makeWebhookResult(req):
     a = list()
     a = getData2(contexts)
     print (a)
+    marks = 0
     classnumber = a['class']
     subject = a['subject']
     chapternumber =a['chapternumber']
@@ -82,7 +83,7 @@ def makeWebhookResult(req):
     currentquestion =a['currentquestion']
     previousquestion =a['previousquestion']
     previousAnswer =a['previousAnswer']
-    
+    marks = a['marks']
     #parameters = result.get("parameters")
     #useranswer = parameters.get("answer")
     
@@ -113,7 +114,8 @@ def makeWebhookResult(req):
         temp= previousquestion-1
         RightAnswer = getAnswer(myobjectx.testpaper[testpaper][temp])
         if Respondedanswer ==  RightAnswer:
-            correctIncorrectMessage = "Great! Correct Answer "
+            marks =marks+1
+            correctIncorrectMessage = "Great! Correct Answer " + "Your marks:" + str(marks)
         else:
             correctIncorrectMessage = "Oops! " + "Correct Answer is " + str(RightAnswer)
     log('step6')
@@ -143,7 +145,7 @@ def makeWebhookResult(req):
     #"contextOut": [],
     #print(str(sessionID) + "#" + str(chapternumber) + "#" + str(testpaper) + "#" + previousquestion + "#" + correctIncorrectMessage)
     print(correctIncorrectMessage + "#" + str(QuestionText) + "#" + str(Option1) + "#" + Option2 + "#" + Option3)
-    return ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4)
+    return ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,previousquestion,marks)
 
 def FinalMessage(correctIncorrectMessage):
     return
@@ -305,7 +307,11 @@ def getData2(contexts):
         previousquestion = min(questionarray)
         previousAnswer = 0
     print('before dict')       
-
+    marks = 0
+    try:
+        marks = int(parameters[1]['marks'])
+    except:
+        marks = 0
     d = dict()
     if len(contextnames) == 2:
         d['class'] =int(parameters[1]['class'])
@@ -315,6 +321,7 @@ def getData2(contexts):
         d['currentquestion'] =int(currentquestion)
         d['previousquestion'] =int(previousquestion)
         d['previousAnswer'] = int(previousAnswer)
+        d['marks'] = int(marks)
     if len(contextnames) == 1:
         d['class'] =int(parameters[0]['class'])
         d['subject'] =parameters[0]['subject']		
@@ -323,6 +330,7 @@ def getData2(contexts):
         d['currentquestion'] =int(currentquestion)
         d['previousquestion'] =int(previousquestion)
         d['previousAnswer'] = int(previousAnswer)
+        d['marks'] = int(marks)
     
     return d
 def getChapterObject2(classnumber,subject,chapter):
@@ -414,14 +422,14 @@ def readLine(file_name,contextName):
             #answer = words2[3]
             break
     fp.close()
-def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4):
+def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,previousquestion,marks):
     print('inside response function')
     return {
     "contextOut": [
     {
-	  "name": "q1",
+	  "name": "q" + str( previousquestion),
           "parameters": {
-          "marks":"100"
+          "marks":marks
                  
                     },
                     "lifespan": 5

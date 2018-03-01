@@ -303,7 +303,7 @@ def getData2(contexts):
     else:
         previousquestion = min(questionarray)
         previousAnswer = 0
-    print(before dict)       
+    print('before dict')       
 
     d = dict()
     if len(contextnames) == 2:

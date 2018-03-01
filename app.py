@@ -327,7 +327,12 @@ def getData2(contexts):
 def getChapterObject2(classnumber,subject,chapter):
     classname = 'class' + classnumber + 'subject' + subject +'chapter' + chapter
     classname = 'chapter1'
-    obj = globals()[classname]()
+    obj  = chapter1()
+    try:
+        obj = globals()[classname]()
+    except:
+        print(sys.exc_info()[0])
+    #obj = globals()[classname]()
     return obj
 	
 def getChapterObject(chapterContext):

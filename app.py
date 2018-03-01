@@ -277,7 +277,6 @@ def getData2(contexts):
     
     print (contextnames)
     print (lifespan)
-    print (parameters[1]['answer'])
     questionarray=[0,0]
     c=0
     for x in range(len(contextnames)):

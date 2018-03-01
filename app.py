@@ -287,12 +287,12 @@ def getData2(contexts):
             chapternumber= contextnames[x].replace('chapter','')
         if 'testpaper' in contextnames[x] and lifespan[x] ==5:
             testpaper = contextnames[x].replace('testpaper','')
-        if len(contextnames) ==1 and 'Q' in contextnames[x] and lifespan[x] ==5:
-            currentquestion = contextnames[x].replace('Q','')
+        if len(contextnames) ==1 and 'q' in contextnames[x] and lifespan[x] ==5:
+            currentquestion = contextnames[x].replace('q','')
         
-        if len(contextnames) ==2 and 'Q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
+        if len(contextnames) ==2 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
             
-            questionarray[c] = contextnames[x].replace('Q','')
+            questionarray[c] = contextnames[x].replace('q','')
             c= c+1
             
     

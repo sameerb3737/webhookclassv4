@@ -140,9 +140,9 @@ def makeWebhookResult(req):
     log('before response')
     print("Response:")
     #print(speech1)
-     #"contextOut": [],
-    emptyspace = ""
-    print(str(sessionID) + "#" + str(chapternumber) + "#" + str(testpaper) + "#" + previousquestion + "#" + correctIncorrectMessage)
+    #"contextOut": [],
+    #print(str(sessionID) + "#" + str(chapternumber) + "#" + str(testpaper) + "#" + previousquestion + "#" + correctIncorrectMessage)
+    print(correctIncorrectMessage + "#" + str(QuestionText) + "#" + str(Option1) + "#" + Option2 + "#" + Option3)
     return ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4)
 
 def FinalMessage(correctIncorrectMessage):
@@ -415,6 +415,7 @@ def readLine(file_name,contextName):
             break
     fp.close()
 def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4):
+    print('inside response function')
     return {
    "speech":"",
    "messages":[

@@ -299,9 +299,11 @@ def getData2(contexts):
     
     print('questionarray') 
     if len(contextnames) > 1:
+        indexpara= 0
+        indexpara = len(contextnames) -1
         currentquestion =  max(questionarray)
         previousquestion = max(questionarray)-1
-        previousAnswer = parameters[1]['answer']
+        previousAnswer = parameters[indexpara]['answer']
     else:
         previousquestion = min(questionarray)
         previousAnswer = 0
@@ -316,10 +318,12 @@ def getData2(contexts):
         marks = 0
     d = dict()
     if len(contextnames) > 1:
-        d['class'] =int(parameters[1]['class'])
-        d['subject'] =parameters[1]['subject']		
-        d['chapternumber'] =int(parameters[1]['chapter'])
-        d['testpaper'] =int(parameters[1]['testpaper'])
+        indexpara= 0
+        indexpara = len(contextnames) -1
+        d['class'] =int(parameters[indexpara]['class'])
+        d['subject'] =parameters[indexpara]['subject']		
+        d['chapternumber'] =int(parameters[indexpara]['chapter'])
+        d['testpaper'] =int(parameters[indexpara]['testpaper'])
         d['currentquestion'] =int(currentquestion)
         d['previousquestion'] =int(previousquestion)
         d['previousAnswer'] = int(previousAnswer)

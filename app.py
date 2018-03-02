@@ -303,7 +303,7 @@ def getData2(contexts):
         indexpara = len(contextnames) -1
         currentquestion =  max(questionarray)
         previousquestion = max(questionarray)-1
-        previousAnswer = parameters[indexpara]['answer']
+        previousAnswer = int(parameters[indexpara]['answer'])
     else:
         previousquestion = min(questionarray)
         previousAnswer = 0

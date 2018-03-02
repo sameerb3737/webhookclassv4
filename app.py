@@ -255,7 +255,9 @@ def getData2(contexts):
     parameters=list();
     
     for i in range(len(contexts)):
-        input = contexts[i]
+        if i > 1:
+            break
+	input = contexts[i]
         all_keys = input.keys()
         
         
@@ -284,7 +286,7 @@ def getData2(contexts):
     questionarray=[0,0]
     c=0
     for x in range(len(contextnames)):
-        if(x>1):
+        if x>1:
             break
         if 'chapter' in contextnames[x] and lifespan[x] ==5:
             chapternumber= contextnames[x].replace('chapter','')
@@ -293,7 +295,7 @@ def getData2(contexts):
         if len(contextnames) ==1 and 'q' in contextnames[x] and lifespan[x] ==5:
             currentquestion = contextnames[x].replace('q','')
         
-        if len(contextnames) ==2 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4 or lifespan[x] ==3):
+        if len(contextnames) ==2 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
             
             questionarray[c] = contextnames[x].replace('q','')
             c= c+1

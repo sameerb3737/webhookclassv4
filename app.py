@@ -424,8 +424,7 @@ def readLine(file_name,contextName):
             #answer = words2[3]
             break
     fp.close()
-def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,marks,\
-    class,subject,chapter,testpaper):
+def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,marks,classnumber,subject,chapter,testpaper):
     print('inside response function')
     return {
     "contextOut": [
@@ -433,7 +432,7 @@ def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,O
 	  "name": "q" + str(currentquestion) ,
           "parameters": {
           "marks":marks,
-	  "class": class,
+	  "class": classnumber,
           "subject": subject,
           "chapter": chapter,
           "testpaper": testpaper                 

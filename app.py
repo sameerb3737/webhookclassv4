@@ -295,7 +295,7 @@ def getData2(contexts):
         
             if len(contextnames) >1 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
             
-                questionarray[c] = contextnames[x].replace('q','')
+                questionarray[c] = int(contextnames[x].replace('q',''))
                 c= c+1
             
     

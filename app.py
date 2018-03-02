@@ -432,10 +432,10 @@ def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,O
 	  "name": "q" + str(currentquestion) ,
           "parameters": {
           "marks":marks,
-	  "class": classnumber,
+	  "class": str(classnumber),
           "subject": subject,
-          "chapter": chapter,
-          "testpaper": testpaper                 
+          "chapter": str(chapter),
+          "testpaper": str(testpaper)                 
           },
                     "lifespan": 5
      }

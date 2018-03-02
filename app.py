@@ -698,7 +698,7 @@ def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,O
 
 def getAnswer(line):
     words3 = line.split("#")
-    print('answer' + str(words3[6])
+    print('answer' + str(words3[6]))
     return int(words3[6])
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))

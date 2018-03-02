@@ -306,7 +306,7 @@ def getData2(contexts):
             print(indexpara)
             currentquestion =  max(questionarray)
             previousquestion = max(questionarray) - 1
-            previousAnswer = int(parameters[indexpara]['answer'])
+            previousAnswer = parameters[indexpara]['answer']
         else:
             previousquestion = min(questionarray)
             previousAnswer = 0
@@ -343,7 +343,7 @@ def getData2(contexts):
     except:
         print(sys.exc_info()[0])
         print(sys.exc_info()[1])
-        print(sys.exc_info()[2])
+        print(sys.exc_info()[2].tb_lineno)
     return d
 def getChapterObject2(classnumber,subject,chapter):
     classname=''

@@ -112,8 +112,6 @@ def makeWebhookResult(req):
     if ( difference == 1) and (currentquestion > 1):
         log('inside if')
         temp= previousquestion-1
-        print(Respondedanswer)
-        print(RightAnswer)
         RightAnswer = getAnswer(myobjectx.testpaper[testpaper][temp])
         if Respondedanswer ==  RightAnswer:
             marks =marks+1
@@ -700,7 +698,8 @@ def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,O
 
 def getAnswer(line):
     words3 = line.split("#")
-    return words3[6]
+    print('answer' + str(words3[6])
+    return int(words3[6])
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
 

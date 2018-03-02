@@ -292,7 +292,7 @@ def getData2(contexts):
         if len(contextnames) ==1 and 'q' in contextnames[x] and lifespan[x] ==5:
             currentquestion = contextnames[x].replace('q','')
         
-        if len(contextnames) ==2 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
+        if len(contextnames) ==2 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4 or lifespan[x] ==3):
             
             questionarray[c] = contextnames[x].replace('q','')
             c= c+1

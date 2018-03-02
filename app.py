@@ -250,94 +250,100 @@ def getData(contexts):
     return d
 	
 def getData2(contexts):
-    contextnames =list();
-    lifespan =list();
-    parameters=list();
     
-    for i in range(len(contexts)):
-        input = contexts[i]
-        all_keys = input.keys()
+    contextnames =list()
+    lifespan =list()
+    parameters=list()
+    d = dict()
+    try:	
+        for i in range(len(contexts)):
+            input = contexts[i]
+            all_keys = input.keys()
         
         
-        for key in  all_keys:
+            for key in  all_keys:
             
-            if isinstance(input[key],str):
+                if isinstance(input[key],str):
                 
-                contextnames.append(input[key])
-            else:
-                if isinstance(input[key],int):
-                    lifespan.append(input[key])
+                    contextnames.append(input[key])
                 else:
-                    parameters.append( input[key])
+                    if isinstance(input[key],int):
+                        lifespan.append(input[key])
+                    else:
+                        parameters.append( input[key])
                     
     
             
-    chapternumber =1
-    testpaper =1
-    currentquestion=1
-    previousquestion=0
-    previousAnswer =1
+        chapternumber =1
+        testpaper =1
+        currentquestion=1
+        previousquestion=0
+        previousAnswer =1
     
-    print (contextnames)
-    print (lifespan)
-    print(parameters)
-    questionarray=[0,0]
-    c=0
-    for x in range(len(contextnames)):
-        if 'chapter' in contextnames[x] and lifespan[x] ==5:
-            chapternumber= contextnames[x].replace('chapter','')
-        if 'testpaper' in contextnames[x] and lifespan[x] ==5:
-            testpaper = contextnames[x].replace('testpaper','')
-        if len(contextnames) ==1 and 'q' in contextnames[x] and lifespan[x] ==5:
-            currentquestion = contextnames[x].replace('q','')
+        print (contextnames)
+        print (lifespan)
+        print(parameters)
+        questionarray=[0,0]
+        c=0
+        for x in range(len(contextnames)):
+            if 'chapter' in contextnames[x] and lifespan[x] ==5:
+                chapternumber= contextnames[x].replace('chapter','')
+            if 'testpaper' in contextnames[x] and lifespan[x] ==5:
+                testpaper = contextnames[x].replace('testpaper','')
+            if len(contextnames) ==1 and 'q' in contextnames[x] and lifespan[x] ==5:
+                currentquestion = contextnames[x].replace('q','')
         
-        if len(contextnames) >1 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
+            if len(contextnames) >1 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
             
-            questionarray[c] = contextnames[x].replace('q','')
-            c= c+1
+                questionarray[c] = contextnames[x].replace('q','')
+                c= c+1
             
     
-    print('questionarray') 
-    if len(contextnames) > 1:
-        indexpara= 0
-        indexpara = len(contextnames) -1
-        currentquestion =  max(questionarray)
-        previousquestion = max(questionarray)-1
-        previousAnswer = int(parameters[indexpara]['answer'])
-    else:
-        previousquestion = min(questionarray)
-        previousAnswer = 0
-    print('before dict')       
-    marks = 0
-    try:
+        print(questionarray) 
         if len(contextnames) > 1:
-            marks = int(parameters[0]['marks'])
+            indexpara= 0
+            indexpara = len(contextnames) -1
+            print(indexpara)
+            currentquestion =  max(questionarray)
+            previousquestion = max(questionarray) - 1
+            previousAnswer = int(parameters[indexpara]['answer'])
         else:
-            marks =0
-    except:
+            previousquestion = min(questionarray)
+            previousAnswer = 0
+        print('before dict')       
         marks = 0
-    d = dict()
-    if len(contextnames) > 1:
-        indexpara= 0
-        indexpara = len(contextnames) -1
-        d['class'] =int(parameters[indexpara]['class'])
-        d['subject'] =parameters[indexpara]['subject']		
-        d['chapternumber'] =int(parameters[indexpara]['chapter'])
-        d['testpaper'] =int(parameters[indexpara]['testpaper'])
-        d['currentquestion'] =int(currentquestion)
-        d['previousquestion'] =int(previousquestion)
-        d['previousAnswer'] = int(previousAnswer)
-        d['marks'] = int(marks)
-    if len(contextnames) == 1:
-        d['class'] =int(parameters[0]['class'])
-        d['subject'] =parameters[0]['subject']		
-        d['chapternumber'] =int(parameters[0]['chapter'])
-        d['testpaper'] =int(parameters[0]['testpaper'])
-        d['currentquestion'] =int(currentquestion)
-        d['previousquestion'] =int(previousquestion)
-        d['previousAnswer'] = int(previousAnswer)
-        d['marks'] = int(marks)
+        try:
+            if len(contextnames) > 1:
+                marks = int(parameters[0]['marks'])
+            else:
+                marks =0
+        except:
+            marks = 0
     
+        if len(contextnames) > 1:
+            indexpara= 0
+            indexpara = len(contextnames) -1
+            d['class'] =int(parameters[indexpara]['class'])
+            d['subject'] =parameters[indexpara]['subject']		
+            d['chapternumber'] =int(parameters[indexpara]['chapter'])
+            d['testpaper'] =int(parameters[indexpara]['testpaper'])
+            d['currentquestion'] =int(currentquestion)
+            d['previousquestion'] =int(previousquestion)
+            d['previousAnswer'] = int(previousAnswer)
+            d['marks'] = int(marks)
+        if len(contextnames) == 1:
+            d['class'] =int(parameters[0]['class'])
+            d['subject'] =parameters[0]['subject']		
+            d['chapternumber'] =int(parameters[0]['chapter'])
+            d['testpaper'] =int(parameters[0]['testpaper'])
+            d['currentquestion'] =int(currentquestion)
+            d['previousquestion'] =int(previousquestion)
+            d['previousAnswer'] = int(previousAnswer)
+            d['marks'] = int(marks)
+    except:
+        print(sys.exc_info()[0])
+        print(sys.exc_info()[1])
+        print(sys.exc_info()[2])
     return d
 def getChapterObject2(classnumber,subject,chapter):
     classname=''

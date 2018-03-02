@@ -145,7 +145,7 @@ def makeWebhookResult(req):
     #"contextOut": [],
     #print(str(sessionID) + "#" + str(chapternumber) + "#" + str(testpaper) + "#" + previousquestion + "#" + correctIncorrectMessage)
     print(correctIncorrectMessage + "#" + str(QuestionText) + "#" + str(Option1) + "#" + Option2 + "#" + Option3)
-    return ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,marks)
+    return ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,marks,classnumber,subject,chapternumber,testpaper)
 
 def FinalMessage(correctIncorrectMessage):
     return
@@ -255,8 +255,6 @@ def getData2(contexts):
     parameters=list();
     
     for i in range(len(contexts)):
-        if i > 1:
-            break
         input = contexts[i]
         all_keys = input.keys()
         
@@ -286,8 +284,6 @@ def getData2(contexts):
     questionarray=[0,0]
     c=0
     for x in range(len(contextnames)):
-        if x>1:
-            break
         if 'chapter' in contextnames[x] and lifespan[x] ==5:
             chapternumber= contextnames[x].replace('chapter','')
         if 'testpaper' in contextnames[x] and lifespan[x] ==5:
@@ -295,16 +291,16 @@ def getData2(contexts):
         if len(contextnames) ==1 and 'q' in contextnames[x] and lifespan[x] ==5:
             currentquestion = contextnames[x].replace('q','')
         
-        if len(contextnames) ==2 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
+        if len(contextnames) >1 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
             
             questionarray[c] = contextnames[x].replace('q','')
             c= c+1
             
     
     
-    if len(contextnames) == 2:
+    if len(contextnames) > 1:
         currentquestion =  max(questionarray)
-        previousquestion = min(questionarray)
+        previousquestion = max(questionarray)-1
         previousAnswer = parameters[1]['answer']
     else:
         previousquestion = min(questionarray)
@@ -312,14 +308,14 @@ def getData2(contexts):
     print('before dict')       
     marks = 0
     try:
-        if len(contextnames) == 2:
+        if len(contextnames) > 1:
             marks = int(parameters[0]['marks'])
         else:
             marks =0
     except:
         marks = 0
     d = dict()
-    if len(contextnames) == 2:
+    if len(contextnames) > 1:
         d['class'] =int(parameters[1]['class'])
         d['subject'] =parameters[1]['subject']		
         d['chapternumber'] =int(parameters[1]['chapter'])
@@ -428,14 +424,19 @@ def readLine(file_name,contextName):
             #answer = words2[3]
             break
     fp.close()
-def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,marks):
+def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,marks,class,subject,chapter,testpaper):
     print('inside response function')
     return {
     "contextOut": [
     {
 	  "name": "q" + str(currentquestion) ,
           "parameters": {
-          "marks":marks
+          "marks":marks,
+	  "class": class,
+          "subject": subject,
+          "chapter": chapter,
+          "testpaper": testpaper
+          
                  
                     },
                     "lifespan": 5

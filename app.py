@@ -145,7 +145,7 @@ def makeWebhookResult(req):
     #"contextOut": [],
     #print(str(sessionID) + "#" + str(chapternumber) + "#" + str(testpaper) + "#" + previousquestion + "#" + correctIncorrectMessage)
     print(correctIncorrectMessage + "#" + str(QuestionText) + "#" + str(Option1) + "#" + Option2 + "#" + Option3)
-    return ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,marks,classnumber,subject,chapternumber,testpaper)
+    return ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,previousquestion,marks,classnumber,subject,chapternumber,testpaper)
 
 def FinalMessage(correctIncorrectMessage):
     return
@@ -434,7 +434,7 @@ def readLine(file_name,contextName):
             #answer = words2[3]
             break
     fp.close()
-def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,marks,classnumber,subject,chapter,testpaper):
+def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,previousquestion,marks,classnumber,subject,chapter,testpaper):
     print('inside response function')
     return {
     "contextOut": [
@@ -447,7 +447,18 @@ def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,O
           "chapter": str(chapter),
           "testpaper": str(testpaper)                 
           },
-                    "lifespan": 5
+          "lifespan": 5
+     },
+     {
+	  "name": "q" + str(previousquestion) ,
+          "parameters": {
+          "marks":marks,
+	  "class": str(classnumber),
+          "subject": subject,
+          "chapter": str(chapter),
+          "testpaper": str(testpaper)                 
+          },
+           "lifespan": 0
      }
     ],	    
    "speech":"",

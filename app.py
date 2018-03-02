@@ -257,7 +257,7 @@ def getData2(contexts):
     for i in range(len(contexts)):
         if i > 1:
             break
-	input = contexts[i]
+        input = contexts[i]
         all_keys = input.keys()
         
         

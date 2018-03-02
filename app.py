@@ -297,7 +297,7 @@ def getData2(contexts):
             c= c+1
             
     
-    
+    print('questionarray') 
     if len(contextnames) > 1:
         currentquestion =  max(questionarray)
         previousquestion = max(questionarray)-1

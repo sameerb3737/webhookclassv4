@@ -284,7 +284,8 @@ def getData2(contexts):
     questionarray=[0,0]
     c=0
     for x in range(len(contextnames)):
-    
+        if(x>1):
+            break
         if 'chapter' in contextnames[x] and lifespan[x] ==5:
             chapternumber= contextnames[x].replace('chapter','')
         if 'testpaper' in contextnames[x] and lifespan[x] ==5:

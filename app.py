@@ -430,7 +430,7 @@ def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,O
     return {
     "contextOut": [
     {
-	  "name": "q1" ,
+	  "name": "q" + str(currentquestion) ,
           "parameters": {
           "marks":marks
                  

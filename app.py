@@ -322,7 +322,7 @@ def getData2(contexts):
     
         if len(contextnames) > 1:
             indexpara= 0
-            indexpara = len(contextnames) -1
+            #indexpara = len(contextnames) -1
             d['class'] =int(parameters[indexpara]['class'])
             d['subject'] =parameters[indexpara]['subject']		
             d['chapternumber'] =int(parameters[indexpara]['chapter'])

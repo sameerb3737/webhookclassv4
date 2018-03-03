@@ -117,7 +117,7 @@ def makeWebhookResult(req):
             marks =marks+1
             correctIncorrectMessage = "Great! Correct Answer " + "Your marks:" + str(marks)
         else:
-            correctIncorrectMessage = "Oops! " + "Correct Answer is " + str(RightAnswer)
+            correctIncorrectMessage = "Oops! " + "Correct Answer is " + str(RightAnswer) + ". " + "Your marks:" + str(marks)
     log('step6')
     if ( currentquestion > 30):
         return FinalMessage(correctIncorrectMessage)

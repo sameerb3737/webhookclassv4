@@ -436,10 +436,14 @@ def readLine(file_name,contextName):
     fp.close()
 def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,previousquestion,marks,classnumber,subject,chapter,testpaper):
     print('inside response function')
+    if currentquestion == 1:
+        currentquestion = currentquestion +1
+        previousquestion = previousquestion + 1
+	
     return {
     "contextOut": [
     {
-	  "name": "q" + str(currentquestion+1) ,
+	  "name": "q" + str(currentquestion) ,
           "parameters": {
           "marks":marks,
 	  "class": str(classnumber),
@@ -450,7 +454,7 @@ def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,O
           "lifespan": 5
      },
      {
-	  "name": "q" + str(previousquestion+1) ,
+	  "name": "q" + str(previousquestion) ,
           "parameters": {
           "marks":marks,
 	  "class": str(classnumber),

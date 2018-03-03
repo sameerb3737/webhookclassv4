@@ -439,7 +439,7 @@ def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,O
     return {
     "contextOut": [
     {
-	  "name": "q" + str(currentquestion) ,
+	  "name": "q" + str(currentquestion+1) ,
           "parameters": {
           "marks":marks,
 	  "class": str(classnumber),
@@ -450,7 +450,7 @@ def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,O
           "lifespan": 5
      },
      {
-	  "name": "q" + str(previousquestion) ,
+	  "name": "q" + str(previousquestion+1) ,
           "parameters": {
           "marks":marks,
 	  "class": str(classnumber),

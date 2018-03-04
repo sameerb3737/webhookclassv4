@@ -148,38 +148,38 @@ def makeWebhookResult(req):
     return ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,previousquestion,marks,classnumber,subject,chapternumber,testpaper)
 
 def FinalMessage(correctIncorrectMessage):
-    print('FinalMessage')
-    return
-    {
-    "speech":"",
-    "messages":[
-      #{
-      #   "type":3,
-      #   "platform":"facebook",
-      #   "imageUrl":"http://charityrefresh.org/ella/asset.hello-ella.gif"
-      #},
-      {
-         "type":0,
-         "platform":"facebook",
-         "speech": correctIncorrectMessage 
-      },
-      {
-         "type":0,
-         "platform":"facebook",
-         "speech":"You had reach end of test" 
-      },
-      {
-          "type": 2,
-          "platform": "facebook",
-          "title": "Do you want to Try some more test?",
-          "replies": [
-            "Goback",
-            "Exit"
+    print(correctIncorrectMessage)
+    try:
+        return
+        {
+        "speech":"",
+        "messages":[
+         {
+             "type":0,
+             "platform":"facebook",
+             "speech": correctIncorrectMessage 
+          },
+          {
+             "type":0,
+             "platform":"facebook",
+             "speech":"You had reach end of test" 
+          },
+          {
+              "type": 2,
+              "platform": "facebook",
+              "title": "Do you want to Try some more test?",
+              "replies": [
+                "Goback",
+                "Exit"
             
-          ]
-     }
-  ] 
-}
+             ]
+             }
+          ] 
+        }
+    except:
+        print(sys.exc_info()[0])
+        print(sys.exc_info()[1])
+        print(sys.exc_info()[2].tb_lineno)
 	
 def getData(contexts):
     contextnames =list();

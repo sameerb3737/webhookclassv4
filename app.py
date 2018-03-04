@@ -323,10 +323,17 @@ def getData2(contexts):
         if len(contextnames) > 1:
             indexpara= 0
             #indexpara = len(contextnames) -1
-            d['class'] =int(parameters[indexpara]['class'])
-            d['subject'] =parameters[indexpara]['subject']		
-            d['chapternumber'] =int(parameters[indexpara]['chapter'])
-            d['testpaper'] =int(parameters[indexpara]['testpaper'])
+            try:
+                d['class'] =int(parameters[indexpara]['class'])
+                d['subject'] =parameters[indexpara]['subject']		
+                d['chapternumber'] =int(parameters[indexpara]['chapter'])
+                d['testpaper'] =int(parameters[indexpara]['testpaper'])
+            except:
+                indexpara= 1
+                d['class'] =int(parameters[indexpara]['class'])
+                d['subject'] =parameters[indexpara]['subject']		
+                d['chapternumber'] =int(parameters[indexpara]['chapter'])
+                d['testpaper'] =int(parameters[indexpara]['testpaper'])
             d['currentquestion'] =int(currentquestion)
             d['previousquestion'] =int(previousquestion)
             d['previousAnswer'] = int(previousAnswer)

@@ -115,11 +115,11 @@ def makeWebhookResult(req):
         RightAnswer = getAnswer(myobjectx.testpaper[testpaper][temp])
         if Respondedanswer ==  RightAnswer:
             marks =marks+1
-            correctIncorrectMessage = "Great! Correct Answer " + "Your marks:" + str(marks)
+            correctIncorrectMessage = "Great! Correct Answer " + "! Your marks:" + str(marks)
         else:
             correctIncorrectMessage = "Oops! " + "Correct Answer is " + str(RightAnswer) + ". " + "Your marks:" + str(marks)
     log('step6')
-    if ( currentquestion > 30):
+    if ( currentquestion > 32):
         return FinalMessage(correctIncorrectMessage)
     temp1= currentquestion-1
     line= myobjectx.testpaper[testpaper][temp1]
@@ -148,10 +148,11 @@ def makeWebhookResult(req):
     return ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,previousquestion,marks,classnumber,subject,chapternumber,testpaper)
 
 def FinalMessage(correctIncorrectMessage):
+    print('FinalMessage')
     return
     {
-   "speech":"",
-   "messages":[
+    "speech":"",
+    "messages":[
       #{
       #   "type":3,
       #   "platform":"facebook",

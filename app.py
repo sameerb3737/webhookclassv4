@@ -119,7 +119,7 @@ def makeWebhookResult(req):
         else:
             correctIncorrectMessage = "Oops! " + "Correct Answer is " + str(RightAnswer) + ". " + "Your marks:" + str(marks)
     log('step6')
-    if ( currentquestion > 32):
+    if ( currentquestion > 31):
         return FinalMessage(correctIncorrectMessage)
     temp1= currentquestion-1
     line= myobjectx.testpaper[testpaper][temp1]

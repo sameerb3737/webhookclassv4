@@ -120,7 +120,7 @@ def makeWebhookResult(req):
             correctIncorrectMessage = "Oops! " + "Correct Answer is " + str(RightAnswer) + ". " + "Your marks:" + str(marks)
     log('step6')
     if ( currentquestion > 31):
-        return FinalMessage(correctIncorrectMessage)
+        return FinalMessage(correctIncorrectMessage,currentquestion,previousquestion)
     temp1= currentquestion-1
     line= myobjectx.testpaper[testpaper][temp1]
     log('step7')
@@ -147,11 +147,26 @@ def makeWebhookResult(req):
     print(correctIncorrectMessage + "#" + str(QuestionText) + "#" + str(Option1) + "#" + Option2 + "#" + Option3)
     return ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,previousquestion,marks,classnumber,subject,chapternumber,testpaper)
 
-def FinalMessage(correctIncorrectMessage):
+def FinalMessage(correctIncorrectMessage,currentquestion,previousquestion):
     print(correctIncorrectMessage)
     try:
-        return
+        return  {
+        "contextOut": [
         {
+	  "name": "q" + str(currentquestion) ,
+          "parameters": {
+                 
+          },
+          "lifespan": 0
+        },
+        {
+	  "name": "q" + str(previousquestion) ,
+          "parameters": {
+                   
+          },
+           "lifespan": 0
+        }
+       ],
         "speech":"",
         "messages":[
          {

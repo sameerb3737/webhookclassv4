@@ -382,8 +382,8 @@ def getData2(contexts):
             for key in  all_keys:
             
                 if isinstance(input[key],str):
-                
-                    contextnames.append(input[key])
+                    if 'q' in input[key]:
+                        contextnames.append(input[key])
                 else:
                     if isinstance(input[key],int):
                         lifespan.append(input[key])

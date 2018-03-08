@@ -64,7 +64,7 @@ def getclass1(req):
     classes.append("12")
     #return getclassdetails(str(classes)[1:-1])
     #print(str(json.dumps(classes))[1:-1])
-    return getclassdetails(str(json.dumps(classes))[1:-1])
+    return getclassdetails(json.dumps(classes))
 
 def getsubject(req):
     print('get subject')
@@ -81,8 +81,10 @@ def getsubject(req):
     classnumber ='8'
     print(result.get('parameters'))
     classnumber = result.get('parameters')[0]['class']
+    print( classnumber)
+    print(json.dumps(classsubject[classnumber].split(":")))
     try:
-        return getsubjectdetails(classnumber, str(json.dumps(classsubject[classnumber].split(":")))[1:-1])
+        return getsubjectdetails(classnumber, json.dumps(classsubject[classnumber].split(":")))
     except:
         print(sys.exc_info()[0])
         print(sys.exc_info()[1])

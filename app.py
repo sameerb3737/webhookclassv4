@@ -77,7 +77,7 @@ def getsubject(req):
     classsubject['12'] = "physics:chemistry:biology"
 
     classnumber ='8'
-    getsubjectdetails(str(classsubject[classnumber].split(":"))[1:-1])
+    getsubjectdetails(classnumber, str(classsubject[classnumber].split(":"))[1:-1])
 
 def getchapter(req):
     result = req.get("result")
@@ -95,10 +95,10 @@ def getchapter(req):
     te = 'class' + classnumber + subject
 
     if int(classnumber) < 9:
-        getchapterlessthan8("Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
+        getchapterlessthan8(classnumber, subject, "Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
         #print("Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
     else:
-        getchapterdetails(str(classsubjectchapter[te].split(":"))[1:-1])
+        getchapterdetails(classnumber, subject, str(classsubjectchapter[te].split(":"))[1:-1])
         #print(str(classsubjectchapter[te].split(":"))[1:-1])
 	
 def makeWebhookResult(req):
@@ -859,12 +859,30 @@ def getclassdetails(classdetails):
 
    ]
 }
-def getsubjectdetails(subjectdetails):
+def getsubjectdetails(classnumber, subjectdetails):
     print('inside subject  function')
 
 	
     return {
     "contextOut": [
+    {
+	  "name": "t1"  ,
+          "parameters": {
+          "marks":marks,
+	  "class": str(classnumber)
+               
+          },
+          "lifespan": 5
+     },
+     {
+	  "name": "t2"  ,
+          "parameters": {
+          "marks":marks,
+	  "class": str(classnumber)
+                        
+          },
+           "lifespan": 0
+     }
      ],	    
    "speech":"",
    "messages":[
@@ -919,12 +937,32 @@ def getsubjectdetails(subjectdetails):
 
    ]
 }
-def getchapterlessthan8(chaptermsg):
+def getchapterlessthan8(classnumber, subject, chaptermsg):
     print('inside response function')
     
 	
     return {
     "contextOut": [
+     {
+	  "name": "t1" ,
+          "parameters": {
+          "marks":marks,
+	  "class": str(classnumber),
+          "subject": subject
+                     
+          },
+          "lifespan": 5
+     },
+     {
+	  "name": "t2"  ,
+          "parameters": {
+          "marks":marks,
+	  "class": str(classnumber),
+          "subject": subject
+                 
+          },
+           "lifespan": 0
+     }
   
     ],	    
    "speech":"",

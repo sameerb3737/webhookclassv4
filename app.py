@@ -139,7 +139,14 @@ def gettestpaper(req):
     classnumber = result.get('parameters')['class']
     subject = result.get('parameters')['subject']
     chapter = result.get('parameters')['chapter']
-    return gettestpaper(classnumber,subject,chapter,"Enter Test Number")
+    result1 =''
+    try:
+        result1 = gettestpaper(classnumber,subject,chapter,"Enter Test Number")
+    except:
+        print(sys.exc_info()[0])
+        print(sys.exc_info()[1])
+        print(sys.exc_info()[2].tb_lineno)
+    return result1
 def makeWebhookResult(req):
 
     if req.get("result").get("action") == "getclass":

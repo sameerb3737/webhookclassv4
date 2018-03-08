@@ -65,6 +65,7 @@ def getclass(req):
     return getclassdetails(str(classes)[1:-1])
 
 def getsubject(req):
+    print('get subject')
     result = req.get("result")
     sessionID = req.get("sessionId")
     contexts = result.get("contexts")
@@ -76,10 +77,18 @@ def getsubject(req):
     classsubject['11'] = "physics:chemistry:biology"
     classsubject['12'] = "physics:chemistry:biology"
     classnumber ='8'
+    print(result.get('parameters'))
     classnumber = result.get('parameters')('class')
-    return getsubjectdetails(classnumber, str(classsubject[classnumber].split(":"))[1:-1])
+    try:
+        return getsubjectdetails(classnumber, str(classsubject[classnumber].split(":"))[1:-1])
+    except:
+        print(sys.exc_info()[0])
+        print(sys.exc_info()[1])
+        print(sys.exc_info()[2].tb_lineno)    
+    
 
 def getchapter(req):
+    print('get chapter')
     result = req.get("result")
     sessionID = req.get("sessionId")
     contexts = result.get("contexts")
@@ -92,17 +101,24 @@ def getchapter(req):
 
     classnumber ='8'
     subject= ''
-    classnumber = result.get('parameters')('class')
-    subject = result.get('parameters')('subject')
-    subject = 'science'
-    te = 'class' + classnumber + subject
+    print(result.get('parameters'))
     result1=''
-    if int(classnumber) < 9:
-        result1 = getchapterlessthan8(classnumber, subject, "Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
-        #print("Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
-    else:
-        result1 = getchapterdetails(classnumber, subject, str(classsubjectchapter[te].split(":"))[1:-1])
-        #print(str(classsubjectchapter[te].split(":"))[1:-1])
+    try:
+        classnumber = result.get('parameters')('class')
+        subject = result.get('parameters')('subject')
+        subject = 'science'
+        te = 'class' + classnumber + subject
+
+        if int(classnumber) < 9:
+            result1 = getchapterlessthan8(classnumber, subject, "Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
+            #print("Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
+        else:
+            result1 = getchapterdetails(classnumber, subject, str(classsubjectchapter[te].split(":"))[1:-1])
+            #print(str(classsubjectchapter[te].split(":"))[1:-1])
+    except:
+        print(sys.exc_info()[0])
+        print(sys.exc_info()[1])
+        print(sys.exc_info()[2].tb_lineno)    
     return result1
 
 def makeWebhookResult(req):

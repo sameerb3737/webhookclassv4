@@ -1042,7 +1042,7 @@ def getchapterlessthan8(classnumber, subject, chaptermsg):
 
    ]
 }
-def getchapterdetails(chapterdetails):
+def getchapterdetails(classnumber,subject,chapterdetails):
     print('inside subject  function')
 
 	

@@ -117,7 +117,7 @@ def getchapter(req):
     try:
         classnumber = result.get('parameters')['class']
         subject = result.get('parameters')['subject']
-        subject = 'science'
+
         te = 'class' + classnumber + subject
 
         if int(classnumber) < 9:

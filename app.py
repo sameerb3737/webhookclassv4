@@ -64,7 +64,7 @@ def getclass1(req):
     classes.append("12")
     #return getclassdetails(str(classes)[1:-1])
     #print(str(json.dumps(classes))[1:-1])
-    return getclassdetails(json.dumps(classes))
+    return getclassdetails(classes)
 
 def getsubject(req):
     print('get subject')

@@ -77,7 +77,7 @@ def getsubject(req):
     classsubject['12'] = "physics:chemistry:biology"
     classnumber ='8'
     classnumber = result.get('parameters')('class')
-    getsubjectdetails(classnumber, str(classsubject[classnumber].split(":"))[1:-1])
+    return getsubjectdetails(classnumber, str(classsubject[classnumber].split(":"))[1:-1])
 
 def getchapter(req):
     result = req.get("result")
@@ -96,14 +96,15 @@ def getchapter(req):
     subject = result.get('parameters')('subject')
     subject = 'science'
     te = 'class' + classnumber + subject
-
+    result1=''
     if int(classnumber) < 9:
-        getchapterlessthan8(classnumber, subject, "Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
+        result1 = getchapterlessthan8(classnumber, subject, "Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
         #print("Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
     else:
-        getchapterdetails(classnumber, subject, str(classsubjectchapter[te].split(":"))[1:-1])
+        result1 = getchapterdetails(classnumber, subject, str(classsubjectchapter[te].split(":"))[1:-1])
         #print(str(classsubjectchapter[te].split(":"))[1:-1])
-	
+    return result1
+
 def makeWebhookResult(req):
     if req.get("result").get("action") != "shipping.cost":
         return {}

@@ -57,14 +57,50 @@ def getclass(req):
     result = req.get("result")
     sessionID = req.get("sessionId")
     contexts = result.get("contexts")
+    classes = list();
+    classes.append("9")
+    classes.append("10")
+    classes.append("11")
+    classes.append("12")
+    return getclassdetails(str(classes)[1:-1])
+
 def getsubject(req):
     result = req.get("result")
     sessionID = req.get("sessionId")
     contexts = result.get("contexts")
+    classsubject = dict()
+    classsubject['7'] = "science"
+    classsubject['8'] = "science"
+    classsubject['9'] = "physics:chemistry:biology"
+    classsubject['10'] = "physics:chemistry:biology"
+    classsubject['11'] = "physics:chemistry:biology"
+    classsubject['12'] = "physics:chemistry:biology"
+
+    classnumber ='8'
+    getsubjectdetails(str(classsubject[classnumber].split(":"))[1:-1])
+
 def getchapter(req):
     result = req.get("result")
     sessionID = req.get("sessionId")
-    contexts = result.get("contexts")	
+    contexts = result.get("contexts")
+    classsubjectchapter =dict()
+    classsubjectchapter['class9physics'] = "1:2:4"
+    classsubjectchapter['class9chemistry'] = "3:5:6"
+    classsubjectchapter['class9biology'] = "7:10:11"
+    classsubjectchapter['class8science'] = "1:2:3:4:5:6:7:8:9:10:11:12:13:14"
+    classsubjectchapter['class7science'] = "1:2:3:4:5:6:7:8:9:10:11:12:13:14"
+
+    classnumber ='8'
+    subject = 'science'
+    te = 'class' + classnumber + subject
+
+    if int(classnumber) < 9:
+        getchapterlessthan8("Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
+        #print("Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
+    else:
+        getchapterdetails(str(classsubjectchapter[te].split(":"))[1:-1])
+        #print(str(classsubjectchapter[te].split(":"))[1:-1])
+	
 def makeWebhookResult(req):
     if req.get("result").get("action") != "shipping.cost":
         return {}

@@ -131,7 +131,7 @@ def getchapter(req):
         print(sys.exc_info()[1])
         print(sys.exc_info()[2].tb_lineno)    
     return result1
-def gettestpaper(req):
+def gettestpaper1(req):
     print('get testpaper')
     result = req.get("result")
     sessionID = req.get("sessionId")
@@ -139,14 +139,14 @@ def gettestpaper(req):
     classnumber = result.get('parameters')['class']
     subject = result.get('parameters')['subject']
     chapter = result.get('parameters')['chapter']
-    result1 =''
+    result2 =''
     try:
-        result1 = gettestpaper(classnumber,subject,chapter,"Enter Test Number")
+        result2 = gettestpaper(classnumber,subject,chapter,"Enter Test Number")
     except:
         print(sys.exc_info()[0])
         print(sys.exc_info()[1])
         print(sys.exc_info()[2].tb_lineno)
-    return result1
+    return result2
 def makeWebhookResult(req):
 
     if req.get("result").get("action") == "getclass":
@@ -156,7 +156,7 @@ def makeWebhookResult(req):
     if req.get("result").get("action") == "getchapter":
         return getchapter(req)
     if req.get("result").get("action") == "gettestpaper":
-        return gettestpaper(req)
+        return gettestpaper1(req)
     if req.get("result").get("action") != "shipping.cost":
         return {}
     result = req.get("result")

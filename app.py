@@ -85,7 +85,7 @@ def getsubject(req):
         print( classnumber)
         print(json.dumps(classsubject[classnumber].split(":")))
 
-        return getsubjectdetails(classnumber, json.dumps(classsubject[classnumber].split(":")))
+        return getsubjectdetails(classnumber, classsubject[classnumber].split(":"))
     except:
         print(sys.exc_info()[0])
         print(sys.exc_info()[1])
@@ -121,10 +121,10 @@ def getchapter(req):
         te = 'class' + classnumber + subject
 
         if int(classnumber) < 9:
-            result1 = getchapterlessthan8(classnumber, subject, "Send Text Message: " + json.dumps(classsubjectchapter[te].split(":")))
+            result1 = getchapterlessthan8(classnumber, subject, "Send Text Message: " + classsubjectchapter[te].split(":"))
             #print("Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
         else:
-            result1 = getchapterdetails(classnumber, subject, json.dumps(classsubjectchapter[te].split(":")))
+            result1 = getchapterdetails(classnumber, subject, classsubjectchapter[te].split(":"))
             #print(str(classsubjectchapter[te].split(":"))[1:-1])
     except:
         print(sys.exc_info()[0])

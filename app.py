@@ -53,7 +53,7 @@ def webhook():
 def log(msg):
     print (msg)
     sys.stdout.flush()
-def getclass(req):
+def getclass1(req):
     result = req.get("result")
     sessionID = req.get("sessionId")
     contexts = result.get("contexts")
@@ -122,14 +122,15 @@ def getchapter(req):
     return result1
 
 def makeWebhookResult(req):
-    if req.get("result").get("action") != "shipping.cost":
-        return {}
+
     if req.get("result").get("action") == "getclass":
-        return getclass(req)
+        return getclass1(req)
     if req.get("result").get("action") == "getsubject":
         return getsubject(req)
     if req.get("result").get("action") == "getchapter":
         return getchapter(req)
+    if req.get("result").get("action") != "shipping.cost":
+        return {}
     result = req.get("result")
     sessionID = req.get("sessionId")
     

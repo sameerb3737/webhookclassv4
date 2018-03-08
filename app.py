@@ -844,49 +844,49 @@ def getclassdetails(classdetails):
           "type": 2,
           "platform": "facebook",
           "title": "Choose Your Class",
-          "replies": [
+          "replies": 
           classdetails
-          ]
+          
      },
       {
           "type": 2,
           "platform": "slack",
            "title": "Choose Your Class",
-          "replies": [
+          "replies": 
           classdetails
-          ]
+          
      },
       {
           "type": 2,
           "platform": "skype",
             "title": "Choose Your Class",
-          "replies": [
+          "replies": 
           classdetails
-          ]
+          
      },
      {
           "type": 2,
           "platform": "viber",
              "title": "Choose Your Class",
-          "replies": [
+          "replies": 
            classdetails
-          ]
+          
      },
      {
           "type": 2,
           "platform":"kik",
            "title": "Choose Your Class",
-          "replies": [
+          "replies": 
         classdetails
-          ]
+          
      },
      {
           "type": 2,
           "platform": "telegram",
          "title": "Choose Your Class",
-          "replies": [
+          "replies": 
          classdetails
-          ]
+          
      }
 
 
@@ -923,49 +923,49 @@ def getsubjectdetails(classnumber, subjectdetails):
           "type": 2,
           "platform": "facebook",
           "title": "Choose Your Subject",
-          "replies": [
+          "replies": 
             subjectdetails
-          ]
+          
      },
       {
           "type": 2,
           "platform": "slack",
            "title": "Choose Your Subject",
-          "replies": [
+          "replies": 
         subjectdetails
-          ]
+          
      },
       {
           "type": 2,
           "platform": "skype",
             "title": "Choose Your Subject",
-          "replies": [
+          "replies": 
           subjectdetails
-          ]
+          
      },
      {
           "type": 2,
           "platform": "viber",
              "title": "Choose Your Subject",
-          "replies": [
+          "replies": 
           subjectdetails
-          ]
+          
      },
      {
           "type": 2,
           "platform":"kik",
            "title": "Choose Your Subject",
-          "replies": [
+          "replies": 
            subjectdetails
-          ]
+          
      },
      {
           "type": 2,
           "platform": "telegram",
          "title": "Choose Your Subject",
-          "replies": [
+          "replies": 
          subjectdetails
-          ]
+          
      }
 
 
@@ -1075,49 +1075,49 @@ def getchapterdetails(chapterdetails):
           "type": 2,
           "platform": "facebook",
           "title": "Choose Your Chapter",
-          "replies": [
+          "replies": 
             chapterdetails
-          ]
+          
      },
       {
           "type": 2,
           "platform": "slack",
            "title": "Choose Your Chapter",
-          "replies": [
+          "replies": 
         chapterdetails
-          ]
+          
      },
       {
           "type": 2,
           "platform": "skype",
             "title": "Choose Your Chapter",
-          "replies": [
+          "replies": 
           chapterdetails
-          ]
+          
      },
      {
           "type": 2,
           "platform": "viber",
              "title": "Choose Your Chapter",
-          "replies": [
+          "replies": 
           chapterdetails
-          ]
+          
      },
      {
           "type": 2,
           "platform":"kik",
            "title": "Choose Your Chapter",
-          "replies": [
+          "replies": 
            chapterdetails
-          ]
+          
      },
      {
           "type": 2,
           "platform": "telegram",
          "title": "Choose Your Chapter",
-          "replies": [
+          "replies": 
          chapterdetails
-          ]
+          
      }
 
 

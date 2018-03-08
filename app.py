@@ -101,6 +101,12 @@ def getchapter(req):
     classsubjectchapter['class9physics'] = "1:2:4"
     classsubjectchapter['class9chemistry'] = "3:5:6"
     classsubjectchapter['class9biology'] = "7:10:11"
+    classsubjectchapter['class10physics'] = "1:2:4"
+    classsubjectchapter['class10chemistry'] = "3:5:6"
+    classsubjectchapter['class10biology'] = "7:10:11"
+    classsubjectchapter['class11physics'] = "1:2:4"
+    classsubjectchapter['class11chemistry'] = "3:5:6"
+    classsubjectchapter['class11biology'] = "7:10:11"
     classsubjectchapter['class8science'] = "1:2:3:4:5:6:7:8:9:10:11:12:13:14"
     classsubjectchapter['class7science'] = "1:2:3:4:5:6:7:8:9:10:11:12:13:14"
 
@@ -115,10 +121,10 @@ def getchapter(req):
         te = 'class' + classnumber + subject
 
         if int(classnumber) < 9:
-            result1 = getchapterlessthan8(classnumber, subject, "Send Text Message: " + str(json.dumps(classsubjectchapter[te].split(":")))[1:-1])
+            result1 = getchapterlessthan8(classnumber, subject, "Send Text Message: " + json.dumps(classsubjectchapter[te].split(":")))
             #print("Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
         else:
-            result1 = getchapterdetails(classnumber, subject, str(json.dumps(classsubjectchapter[te].split(":")))[1:-1])
+            result1 = getchapterdetails(classnumber, subject, json.dumps(classsubjectchapter[te].split(":")))
             #print(str(classsubjectchapter[te].split(":"))[1:-1])
     except:
         print(sys.exc_info()[0])

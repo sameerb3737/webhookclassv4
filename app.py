@@ -75,8 +75,8 @@ def getsubject(req):
     classsubject['10'] = "physics:chemistry:biology"
     classsubject['11'] = "physics:chemistry:biology"
     classsubject['12'] = "physics:chemistry:biology"
-
     classnumber ='8'
+    classnumber = result.get('parameters')('class')
     getsubjectdetails(classnumber, str(classsubject[classnumber].split(":"))[1:-1])
 
 def getchapter(req):
@@ -91,6 +91,9 @@ def getchapter(req):
     classsubjectchapter['class7science'] = "1:2:3:4:5:6:7:8:9:10:11:12:13:14"
 
     classnumber ='8'
+    subject= ''
+    classnumber = result.get('parameters')('class')
+    subject = result.get('parameters')('subject')
     subject = 'science'
     te = 'class' + classnumber + subject
 

@@ -868,7 +868,7 @@ def getsubjectdetails(classnumber, subjectdetails):
     {
 	  "name": "t1"  ,
           "parameters": {
-          "marks":marks,
+
 	  "class": str(classnumber)
                
           },
@@ -877,7 +877,7 @@ def getsubjectdetails(classnumber, subjectdetails):
      {
 	  "name": "t2"  ,
           "parameters": {
-          "marks":marks,
+   
 	  "class": str(classnumber)
                         
           },
@@ -946,7 +946,7 @@ def getchapterlessthan8(classnumber, subject, chaptermsg):
      {
 	  "name": "t1" ,
           "parameters": {
-          "marks":marks,
+
 	  "class": str(classnumber),
           "subject": subject
                      
@@ -956,7 +956,7 @@ def getchapterlessthan8(classnumber, subject, chaptermsg):
      {
 	  "name": "t2"  ,
           "parameters": {
-          "marks":marks,
+
 	  "class": str(classnumber),
           "subject": subject
                  
@@ -1014,6 +1014,24 @@ def getchapterdetails(chapterdetails):
 	
     return {
     "contextOut": [
+    {
+	  "name": "t1"  ,
+          "parameters": {
+
+	  "class": str(classnumber)
+               
+          },
+          "lifespan": 5
+     },
+     {
+	  "name": "t2"  ,
+          "parameters": {
+   
+	  "class": str(classnumber)
+                        
+          },
+           "lifespan": 0
+     }
      ],	    
    "speech":"",
    "messages":[

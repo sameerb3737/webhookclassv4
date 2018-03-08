@@ -79,11 +79,12 @@ def getsubject(req):
     classsubject['11'] = "physics:chemistry:biology"
     classsubject['12'] = "physics:chemistry:biology"
     classnumber ='8'
-    print(result.get('parameters'))
-    classnumber = result.get('parameters')[0]['class']
-    print( classnumber)
-    print(json.dumps(classsubject[classnumber].split(":")))
     try:
+        print(result.get('parameters'))
+        classnumber = result.get('parameters')['class']
+        print( classnumber)
+        print(json.dumps(classsubject[classnumber].split(":")))
+
         return getsubjectdetails(classnumber, json.dumps(classsubject[classnumber].split(":")))
     except:
         print(sys.exc_info()[0])

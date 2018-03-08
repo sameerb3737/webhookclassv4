@@ -115,8 +115,8 @@ def getchapter(req):
     print(result.get('parameters'))
     result1=''
     try:
-        classnumber = result.get('parameters')[0]['class']
-        subject = result.get('parameters')[1]['subject']
+        classnumber = result.get('parameters')['class']
+        subject = result.get('parameters')['subject']
         subject = 'science'
         te = 'class' + classnumber + subject
 

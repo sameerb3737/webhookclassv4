@@ -53,10 +53,27 @@ def webhook():
 def log(msg):
     print (msg)
     sys.stdout.flush()
-	
+def getclass(req):
+    result = req.get("result")
+    sessionID = req.get("sessionId")
+    contexts = result.get("contexts")
+def getsubject(req):
+    result = req.get("result")
+    sessionID = req.get("sessionId")
+    contexts = result.get("contexts")
+def getchapter(req):
+    result = req.get("result")
+    sessionID = req.get("sessionId")
+    contexts = result.get("contexts")	
 def makeWebhookResult(req):
     if req.get("result").get("action") != "shipping.cost":
         return {}
+    if req.get("result").get("action") == "getclass":
+        return getclass(req)
+    if req.get("result").get("action") == "getsubject":
+        return getsubject(req)
+    if req.get("result").get("action") == "getchapter":
+        return getchapter(req)
     result = req.get("result")
     sessionID = req.get("sessionId")
     
@@ -746,6 +763,237 @@ def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,O
    ]
 }
 
+def getclassdetails(classdetails):
+    print('inside class  function')
+
+	
+    return {
+    "contextOut": [
+     ],	    
+   "speech":"",
+   "messages":[
+    {
+          "type": 2,
+          "platform": "facebook",
+          "title": "Choose Your Class",
+          "replies": [
+          classdetails
+          ]
+     },
+      {
+          "type": 2,
+          "platform": "slack",
+           "title": "Choose Your Class",
+          "replies": [
+          classdetails
+          ]
+     },
+      {
+          "type": 2,
+          "platform": "skype",
+            "title": "Choose Your Class",
+          "replies": [
+          classdetails
+          ]
+     },
+     {
+          "type": 2,
+          "platform": "viber",
+             "title": "Choose Your Class",
+          "replies": [
+           classdetails
+          ]
+     },
+     {
+          "type": 2,
+           "title": "Choose Your Class",
+          "replies": [
+        classdetails
+          ]
+     },
+     {
+          "type": 2,
+          "platform": "telegram",
+         "title": "Choose Your Class",
+          "replies": [
+         classdetails
+          ]
+     }
+
+
+   ]
+}
+def getsubjectdetails(subjectdetails):
+    print('inside subject  function')
+
+	
+    return {
+    "contextOut": [
+     ],	    
+   "speech":"",
+   "messages":[
+    {
+          "type": 2,
+          "platform": "facebook",
+          "title": "Choose Your Subject",
+          "replies": [
+            subjectdetails
+          ]
+     },
+      {
+          "type": 2,
+          "platform": "slack",
+           "title": "Choose Your Subject",
+          "replies": [
+        subjectdetails
+          ]
+     },
+      {
+          "type": 2,
+          "platform": "skype",
+            "title": "Choose Your Subject",
+          "replies": [
+          subjectdetails
+          ]
+     },
+     {
+          "type": 2,
+          "platform": "viber",
+             "title": "Choose Your Subject",
+          "replies": [
+          subjectdetails
+          ]
+     },
+     {
+          "type": 2,
+           "title": "Choose Your Subject",
+          "replies": [
+           subjectdetails
+          ]
+     },
+     {
+          "type": 2,
+          "platform": "telegram",
+         "title": "Choose Your Subject",
+          "replies": [
+         subjectdetails
+          ]
+     }
+
+
+   ]
+}
+def getchapterlessthan8(chaptermsg):
+    print('inside response function')
+    
+	
+    return {
+    "contextOut": [
+  
+    ],	    
+   "speech":"",
+   "messages":[
+      
+      {
+         "type":0,
+         "platform":"facebook",
+         "speech": chaptermsg 
+      },
+    
+      {
+         "type":0,
+         "platform":"slack",
+         "speech": chaptermsg 
+      },
+     
+      {
+         "type":0,
+         "platform":"skype",
+         "speech": chaptermsg 
+      },
+     
+      {
+         "type":0,
+         "platform":"viber",
+         "speech": chaptermsg 
+      },
+     
+      {
+         "type":0,
+         "platform":"kik",
+         "speech": chaptermsg 
+      },
+     
+      {
+         "type":0,
+         "platform":"telegram",
+         "speech": chaptermsg 
+      }
+     
+
+
+   ]
+}
+def getchapterdetails(chapterdetails):
+    print('inside subject  function')
+
+	
+    return {
+    "contextOut": [
+     ],	    
+   "speech":"",
+   "messages":[
+    {
+          "type": 2,
+          "platform": "facebook",
+          "title": "Choose Your Chapter",
+          "replies": [
+            chapterdetails
+          ]
+     },
+      {
+          "type": 2,
+          "platform": "slack",
+           "title": "Choose Your Chapter",
+          "replies": [
+        chapterdetails
+          ]
+     },
+      {
+          "type": 2,
+          "platform": "skype",
+            "title": "Choose Your Chapter",
+          "replies": [
+          chapterdetails
+          ]
+     },
+     {
+          "type": 2,
+          "platform": "viber",
+             "title": "Choose Your Chapter",
+          "replies": [
+          chapterdetails
+          ]
+     },
+     {
+          "type": 2,
+           "title": "Choose Your Chapter",
+          "replies": [
+           chapterdetails
+          ]
+     },
+     {
+          "type": 2,
+          "platform": "telegram",
+         "title": "Choose Your Chapter",
+          "replies": [
+         chapterdetails
+          ]
+     }
+
+
+   ]
+}
 def getAnswer(line):
     words3 = line.split("#")
     print('answer' + str(words3[6]))

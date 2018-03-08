@@ -62,7 +62,8 @@ def getclass1(req):
     classes.append("10")
     classes.append("11")
     classes.append("12")
-    return getclassdetails(str(classes)[1:-1])
+    #return getclassdetails(str(classes)[1:-1])
+    return getclassdetails(classes)
 
 def getsubject(req):
     print('get subject')
@@ -78,7 +79,7 @@ def getsubject(req):
     classsubject['12'] = "physics:chemistry:biology"
     classnumber ='8'
     print(result.get('parameters'))
-    classnumber = result.get('parameters')('class')
+    classnumber = result.get('parameters')[0]['class']
     try:
         return getsubjectdetails(classnumber, str(classsubject[classnumber].split(":"))[1:-1])
     except:
@@ -104,8 +105,8 @@ def getchapter(req):
     print(result.get('parameters'))
     result1=''
     try:
-        classnumber = result.get('parameters')('class')
-        subject = result.get('parameters')('subject')
+        classnumber = result.get('parameters')[0]['class']
+        subject = result.get('parameters')[1]['subject']
         subject = 'science'
         te = 'class' + classnumber + subject
 

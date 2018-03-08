@@ -842,6 +842,7 @@ def getclassdetails(classdetails):
      },
      {
           "type": 2,
+          "platform":"kik",
            "title": "Choose Your Class",
           "replies": [
         classdetails
@@ -920,6 +921,7 @@ def getsubjectdetails(classnumber, subjectdetails):
      },
      {
           "type": 2,
+          "platform":"kik",
            "title": "Choose Your Subject",
           "replies": [
            subjectdetails
@@ -1069,6 +1071,7 @@ def getchapterdetails(chapterdetails):
      },
      {
           "type": 2,
+          "platform":"kik",
            "title": "Choose Your Chapter",
           "replies": [
            chapterdetails

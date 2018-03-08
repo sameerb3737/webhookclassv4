@@ -131,7 +131,15 @@ def getchapter(req):
         print(sys.exc_info()[1])
         print(sys.exc_info()[2].tb_lineno)    
     return result1
-
+def gettestpaper(req):
+    print('get testpaper')
+    result = req.get("result")
+    sessionID = req.get("sessionId")
+    contexts = result.get("contexts")
+    classnumber = result.get('parameters')['class']
+    subject = result.get('parameters')['subject']
+    chapter = result.get('parameters')['chapter']
+    return gettestpaper(classnumber,subject,chapter,"Enter Test Number")
 def makeWebhookResult(req):
 
     if req.get("result").get("action") == "getclass":
@@ -140,6 +148,8 @@ def makeWebhookResult(req):
         return getsubject(req)
     if req.get("result").get("action") == "getchapter":
         return getchapter(req)
+    if req.get("result").get("action") == "gettestpaper":
+        return gettestpaper(req)
     if req.get("result").get("action") != "shipping.cost":
         return {}
     result = req.get("result")
@@ -1123,6 +1133,80 @@ def getchapterdetails(classnumber,subject,chapterdetails):
 
    ]
 }
+def gettestpaper(classnumber, subject, chapter,chaptermsg):
+    print('inside response function')
+    
+	
+    return {
+    "contextOut": [
+     {
+	  "name": "t3" ,
+          "parameters": {
+
+	  "class": str(classnumber),
+          "subject": subject,
+	  "chapter": str(chapter)
+                     
+          },
+          "lifespan": 0
+     },
+     {
+	  "name": "t4"  ,
+          "parameters": {
+
+	  "class": str(classnumber),
+          "subject": subject,
+	  "chapter": str(chapter)
+                 
+          },
+           "lifespan": 5
+     }
+  
+    ],	    
+   "speech":"",
+   "messages":[
+      
+      {
+         "type":0,
+         "platform":"facebook",
+         "speech": chaptermsg 
+      },
+    
+      {
+         "type":0,
+         "platform":"slack",
+         "speech": chaptermsg 
+      },
+     
+      {
+         "type":0,
+         "platform":"skype",
+         "speech": chaptermsg 
+      },
+     
+      {
+         "type":0,
+         "platform":"viber",
+         "speech": chaptermsg 
+      },
+     
+      {
+         "type":0,
+         "platform":"kik",
+         "speech": chaptermsg 
+      },
+     
+      {
+         "type":0,
+         "platform":"telegram",
+         "speech": chaptermsg 
+      }
+     
+
+
+   ]
+}
+
 def getAnswer(line):
     words3 = line.split("#")
     print('answer' + str(words3[6]))

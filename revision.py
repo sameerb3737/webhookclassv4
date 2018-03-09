@@ -79,7 +79,7 @@ def makeWebhookResult(req):
     a = list()
     a = getData2(contexts)
     print (a)
-    marks = 0
+
     classnumber = a['class']
     subject = a['subject']
     chapternumber =a['chapternumber']
@@ -87,7 +87,7 @@ def makeWebhookResult(req):
     currentsentence =a['currentsentence']
     previoussentence =a['previoussentence']
     previousAnswer =int(a['previousAnswer'])
-    marks = a['marks']
+
     #parameters = result.get("parameters")
     #useranswer = parameters.get("answer")
     
@@ -119,31 +119,31 @@ def makeWebhookResult(req):
     
     log('step3.1')
     Respondedanswer  = previousAnswer
-    difference = 0
-    difference = currentsentence - previoussentence
+
     log('step4')
-    if ( difference == 1) and (currentsentence > 1):
-        log('inside if')
-        temp= previoussentence-1
-        RightAnswer = getAnswer(myobjectx.testpaper[testpaper][temp])
-        if Respondedanswer ==  RightAnswer:
-            marks =marks+1
-            correctIncorrectMessage = "Great! Correct Answer " + "! Your marks:" + str(marks)
-        else:
-            correctIncorrectMessage = "Oops! " + "Correct Answer is " + str(RightAnswer) + ". " + "Your marks:" + str(marks)
-    log('step6')
+
     if ( currentsentence > 31):
-        return FinalMessage(correctIncorrectMessage,currentsentence,previoussentence)
-    temp1= currentsentence-1
-    line= myobjectx.testpaper[testpaper][temp1]
+
+
+
+    try:
+        temp1= currentsentence-1
+        line= myobjectx.testpaper[temp1]
+    except IndexError:
+        return FinalMessage("End of Topics",currentsentence,previoussentence)        
+    except:
+        print(sys.exc_info()[0])
+        print(sys.exc_info()[1])
+        print(sys.exc_info()[2].tb_lineno)
+	
+    message = ''
+    url =''
     log('step7')
-    #line= "15#sentence15#Option1#Option2#Option3#Option4#2" 			
-    words3 = line.split("#")
-    sentenceText = words3[1]
-    Option1 = words3[2]
-    Option2 = words3[3]
-    Option3 = words3[4]
-    Option4 = words3[5]
+    if ( '.jpg' in line or 'jpeg' in line):
+        url = line
+    else:
+        message = line
+
 
     cost = {'Europe':100, 'North America':200, 'South America':300, 'Asia':400, 'Africa':500}
     var5	="          \"type\": 0,	"
@@ -154,11 +154,8 @@ def makeWebhookResult(req):
     
     log('before response')
     print("Response:")
-    #print(speech1)
-    #"contextOut": [],
-    #print(str(sessionID) + "#" + str(chapternumber) + "#" + str(testpaper) + "#" + previoussentence + "#" + correctIncorrectMessage)
-    print(correctIncorrectMessage + "#" + str(sentenceText) + "#" + str(Option1) + "#" + Option2 + "#" + Option3)
-    return ReturnWebHookResponse(correctIncorrectMessage,sentenceText,Option1,Option2,Option3,Option4,currentsentence,previoussentence,marks,classnumber,subject,chapternumber,testpaper)
+
+    return ReturnWebHookRevisionResponse(message,url,currentsentence,previoussentence,classnumber,subject,chapternumber)
 
 
 def getData2(contexts):
@@ -176,7 +173,7 @@ def getData2(contexts):
             for key in  all_keys:
             
                 if isinstance(input[key],str):
-                    if 'q' in input[key]:
+                    if 's' in input[key]:
                         contextnames.append(input[key])
                 else:
                     if isinstance(input[key],int):
@@ -190,7 +187,7 @@ def getData2(contexts):
         testpaper =1
         currentsentence=1
         previoussentence=0
-        previousAnswer =1
+        previousAnswer ='1'
     
         print (contextnames)
         print (lifespan)
@@ -202,12 +199,12 @@ def getData2(contexts):
                 chapternumber= contextnames[x].replace('chapter','')
             if 'testpaper' in contextnames[x] and lifespan[x] ==5:
                 testpaper = contextnames[x].replace('testpaper','')
-            if len(contextnames) ==1 and 'q' in contextnames[x] and lifespan[x] ==5:
+            if len(contextnames) ==1 and 's' in contextnames[x] and lifespan[x] ==5:
                 currentsentence = contextnames[x].replace('q','')
         
-            if len(contextnames) >1 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
+            if len(contextnames) >1 and 's' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
             
-                sentencearray[c] = int(contextnames[x].replace('q',''))
+                sentencearray[c] = int(contextnames[x].replace('s',''))
                 c= c+1
             
     
@@ -223,14 +220,7 @@ def getData2(contexts):
             previoussentence = min(sentencearray)
             previousAnswer = 0
         print('before dict')       
-        marks = 0
-        try:
-            if len(contextnames) > 1:
-                marks = int(parameters[0]['marks'])
-            else:
-                marks =0
-        except:
-            marks = 0
+
     
         if len(contextnames) > 1:
             indexpara= 0
@@ -239,26 +229,25 @@ def getData2(contexts):
                 d['class'] =int(parameters[indexpara]['class'])
                 d['subject'] =parameters[indexpara]['subject']		
                 d['chapternumber'] =parameters[indexpara]['chapter']
-                d['testpaper'] =int(parameters[indexpara]['testpaper'])
+
             except:
                 indexpara= 1
                 d['class'] =int(parameters[indexpara]['class'])
                 d['subject'] =parameters[indexpara]['subject']		
                 d['chapternumber'] =parameters[indexpara]['chapter']
-                d['testpaper'] =int(parameters[indexpara]['testpaper'])
+
             d['currentsentence'] =int(currentsentence)
             d['previoussentence'] =int(previoussentence)
-            d['previousAnswer'] = int(previousAnswer)
-            d['marks'] = int(marks)
+            d['previousAnswer'] = previousAnswer
+
         if len(contextnames) == 1:
             d['class'] =int(parameters[0]['class'])
             d['subject'] =parameters[0]['subject']		
             d['chapternumber'] =parameters[0]['chapter']
-            d['testpaper'] =int(parameters[0]['testpaper'])
             d['currentsentence'] =int(currentsentence)
             d['previoussentence'] =int(previoussentence)
-            d['previousAnswer'] = int(previousAnswer)
-            d['marks'] = int(marks)
+            d['previousAnswer'] = previousAnswer
+
     except:
         print(sys.exc_info()[0])
         print(sys.exc_info()[1])

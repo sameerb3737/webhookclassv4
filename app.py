@@ -50,103 +50,7 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 
-def log(msg):
-    print (msg)
-    sys.stdout.flush()
-def getclass1(req):
-    result = req.get("result")
-    sessionID = req.get("sessionId")
-    contexts = result.get("contexts")
-    classes = list();
-    classes.append("9")
-    classes.append("10")
-    classes.append("11")
-    classes.append("12")
-    #return getclassdetails(str(classes)[1:-1])
-    #print(str(json.dumps(classes))[1:-1])
-    return getclassdetails(classes)
 
-def getsubject(req):
-    print('get subject')
-    result = req.get("result")
-    sessionID = req.get("sessionId")
-    contexts = result.get("contexts")
-    classsubject = dict()
-    classsubject['7'] = "science"
-    classsubject['8'] = "science"
-    classsubject['9'] = "physics:chemistry:biology"
-    classsubject['10'] = "physics:chemistry:biology"
-    classsubject['11'] = "physics:chemistry:biology"
-    classsubject['12'] = "physics:chemistry:biology"
-    classnumber ='8'
-    try:
-        print(result.get('parameters'))
-        classnumber = result.get('parameters')['class']
-        print( classnumber)
-        print(json.dumps(classsubject[classnumber].split(":")))
-
-        return getsubjectdetails(classnumber, classsubject[classnumber].split(":"))
-    except:
-        print(sys.exc_info()[0])
-        print(sys.exc_info()[1])
-        print(sys.exc_info()[2].tb_lineno)    
-    
-
-def getchapter(req):
-    print('get chapter')
-    result = req.get("result")
-    sessionID = req.get("sessionId")
-    contexts = result.get("contexts")
-    classsubjectchapter =dict()
-    classsubjectchapter['class9physics'] = "1:2:4"
-    classsubjectchapter['class9chemistry'] = "3:5:6"
-    classsubjectchapter['class9biology'] = "7:10:11"
-    classsubjectchapter['class10physics'] = "1:2:4"
-    classsubjectchapter['class10chemistry'] = "3:5:6"
-    classsubjectchapter['class10biology'] = "7:10:11"
-    classsubjectchapter['class11physics'] = "1:2:4"
-    classsubjectchapter['class11chemistry'] = "3:5:6"
-    classsubjectchapter['class11biology'] = "7:10:11"
-    classsubjectchapter['class8science'] = "1:2:3:4:5:6:7:8:9:10:11:12:13:14"
-    classsubjectchapter['class7science'] = "1:2:3:4:5:6:7:8:9:10:11:12:13:14"
-
-    classnumber ='8'
-    subject= ''
-    print(result.get('parameters'))
-    result1=''
-    try:
-        classnumber = result.get('parameters')['class']
-        subject = result.get('parameters')['subject']
-
-        te = 'class' + classnumber + subject
-
-        if int(classnumber) < 9:
-            result1 = getchapterlessthan8(classnumber, subject, "Send Text Message: " + classsubjectchapter[te].split(":"))
-            #print("Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
-        else:
-            result1 = getchapterdetails(classnumber, subject, classsubjectchapter[te].split(":"))
-            #print(str(classsubjectchapter[te].split(":"))[1:-1])
-    except:
-        print(sys.exc_info()[0])
-        print(sys.exc_info()[1])
-        print(sys.exc_info()[2].tb_lineno)    
-    return result1
-def gettestpaper1(req):
-    print('get testpaper')
-    result = req.get("result")
-    sessionID = req.get("sessionId")
-    contexts = result.get("contexts")
-    classnumber = result.get('parameters')['class']
-    subject = result.get('parameters')['subject']
-    chapter = result.get('parameters')['chapter']
-    result2 =''
-    try:
-        result2 = gettestpaper(classnumber,subject,chapter,"Enter Test Number")
-    except:
-        print(sys.exc_info()[0])
-        print(sys.exc_info()[1])
-        print(sys.exc_info()[2].tb_lineno)
-    return result2
 def makeWebhookResult(req):
 
     if req.get("result").get("action") == "getclass":
@@ -206,8 +110,8 @@ def makeWebhookResult(req):
     log('before getChapterObject2')
     #chapter name and number map  insert here
     chaptername = dict()
-    chaptername['chapter1'] ='1'
-    chaptername['chapter2'] ='2'
+    chaptername = getChapterNameNumber()
+
     tempvar = ''
     try:
         tempvar = chaptername[chapternumber]
@@ -258,124 +162,7 @@ def makeWebhookResult(req):
     print(correctIncorrectMessage + "#" + str(QuestionText) + "#" + str(Option1) + "#" + Option2 + "#" + Option3)
     return ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,previousquestion,marks,classnumber,subject,chapternumber,testpaper)
 
-def FinalMessage(correctIncorrectMessage,currentquestion,previousquestion):
-    print(correctIncorrectMessage)
-    try:
-        return  {
-        "contextOut": [
-        {
-	  "name": "q" + str(currentquestion) ,
-          "parameters": {
-                 
-          },
-          "lifespan": 0
-        },
-        {
-	  "name": "q" + str(previousquestion) ,
-          "parameters": {
-                   
-          },
-           "lifespan": 0
-        }
-       ],
-        "speech":"",
-        "messages":[
-         {
-             "type":0,
-             "platform":"facebook",
-             "speech": correctIncorrectMessage 
-          },
-          {
-             "type":0,
-             "platform":"facebook",
-             "speech":"You had reach end of test" 
-          },
-          {
-              "type": 2,
-              "platform": "facebook",
-              "title": "Do you want to Try some more test?",
-              "replies": [
-                "Goback",
-                "Exit"
-            
-             ]
-             }
-          ] 
-        }
-    except:
-        print(sys.exc_info()[0])
-        print(sys.exc_info()[1])
-        print(sys.exc_info()[2].tb_lineno)
-	
-def getData(contexts):
-    contextnames =list();
-    lifespan =list();
-    parameters=list();
-    
-    for i in range(len(contexts)):
-        input = contexts[i]
-        all_keys = input.keys()
-        
-        
-        for key in  all_keys:
-            
-            if isinstance(input[key],str):
-                
-                contextnames.append(input[key])
-            else:
-                if isinstance(input[key],int):
-                    lifespan.append(input[key])
-                else:
-                    parameters.append( input[key])
-                    
-    	
-            
-    chapternumber =1
-    testpaper =1
-    currentquestion=1
-    previousquestion=0
-    previousAnswer =1
-    
-    print (contextnames)
-    print (lifespan)
-    print (parameters[0]['answer'])
-    questionarray=[0,0]
-    c=0
-    for x in range(len(contextnames)):
-    
-        if 'chapter' in contextnames[x] and lifespan[x] ==5:
-            chapternumber= contextnames[x].replace('chapter','')
-        if 'testpaper' in contextnames[x] and lifespan[x] ==5:
-            testpaper = contextnames[x].replace('testpaper','')
-        if len(contextnames) ==3 and 'q' in contextnames[x] and lifespan[x] ==5:
-            currentquestion = contextnames[x].replace('q','')
-        
-        if len(contextnames) ==4 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
-            
-            questionarray[c] = contextnames[x].replace('q','')
-            c= c+1
-            
-    
-    
-    if len(contextnames) == 4:
-        currentquestion =  max(questionarray)
-        previousquestion = min(questionarray)
-    else:
-        previousquestion = min(questionarray)
-    try:
-        previousAnswer = parameters[0]['answer']
-    except:
-        previousAnswer = 0
-    d = dict()
-    
-    d['chapternumber'] =int(chapternumber)
-    d['testpaper'] =int(testpaper)
-    d['currentquestion'] =int(currentquestion)
-    d['previousquestion'] =int(previousquestion)
-    d['previousAnswer'] =int(previousAnswer)
-    
-    return d
-	
+
 def getData2(contexts):
     
     contextnames =list()
@@ -491,83 +278,7 @@ def getChapterObject2(classnumber,subject,chapter):
     #obj = globals()[classname]()
     return obj
 	
-def getChapterObject(chapterContext):
-    myobjectx = chapter1()
-    if (chapterContext ==  1):
-        myobjectx = chapter1()
-    if (chapterContext ==  2):
-        myobjectx = chapter2()
-    if (chapterContext ==  3):
-        myobjectx = chapter3()
-    if (chapterContext ==  4):
-        myobjectx = chapter4()
-    if (chapterContext ==  5):
-        myobjectx = chapter5()
-    if (chapterContext ==  6):
-        myobjectx = chapter6()
-    if (chapterContext ==  7):
-        myobjectx = chapter7()
-    if (chapterContext ==  8):
-        myobjectx = chapter8()
-    if (chapterContext ==  9):
-        myobjectx = chapter9()
-    if (chapterContext ==  10):
-        myobjectx = chapter10()
-    if (chapterContext ==  11):
-        myobjectx = chapter11()
-    if (chapterContext ==  12):
-        myobjectx = chapter12()
-    if (chapterContext ==  13):
-        myobjectx = chapter13()
-    if (chapterContext ==  14):
-        myobjectx = chapter14()
-    if (chapterContext ==  15):
-        myobjectx = chapter15()
-    if (chapterContext ==  16):
-        myobjectx = chapter16()
-    if (chapterContext ==  17):
-        myobjectx = chapter17()
-    if (chapterContext ==  18):
-        myobjectx = chapter18()
-    if (chapterContext ==  19):
-        myobjectx = chapter19()
-    if (chapterContext ==  20):
-        myobjectx = chapter20()
-    if (chapterContext ==  21):
-        myobjectx = chapter21()
-    if (chapterContext ==  22):
-        myobjectx = chapter22()
-    if (chapterContext ==  23):
-        myobjectx = chapter23()
-    if (chapterContext ==  24):
-        myobjectx = chapter24()
-    if (chapterContext ==  25):
-        myobjectx = chapter25()
-    if (chapterContext ==  26):
-        myobjectx = chapter26()
-    if (chapterContext ==  27):
-        myobjectx = chapter27()
-    if (chapterContext ==  28):
-        myobjectx = chapter28()
 
-    return myobjectx
-
-
-	
-def random_line(fname):
-    lines = open(fname).read().splitlines()
-    return random.choice(lines)
-
-def readLine(file_name,contextName):
-    fp = open(file_name)
-    for i, line in enumerate(fp):
-        if i == string.replace(string.replace(contextName,"q",""),"Q",""):
-            # 26th line
-            return line
-            #questiontext
-            #answer = words2[3]
-            break
-    fp.close()
 def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,previousquestion,marks,classnumber,subject,chapter,testpaper):
     print('inside response function')
     if currentquestion == 1:
@@ -867,6 +578,55 @@ def ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,O
 
    ]
 }
+
+def FinalMessage(correctIncorrectMessage,currentquestion,previousquestion):
+    print(correctIncorrectMessage)
+    try:
+        return  {
+        "contextOut": [
+        {
+	  "name": "q" + str(currentquestion) ,
+          "parameters": {
+                 
+          },
+          "lifespan": 0
+        },
+        {
+	  "name": "q" + str(previousquestion) ,
+          "parameters": {
+                   
+          },
+           "lifespan": 0
+        }
+       ],
+        "speech":"",
+        "messages":[
+         {
+             "type":0,
+             "platform":"facebook",
+             "speech": correctIncorrectMessage 
+          },
+          {
+             "type":0,
+             "platform":"facebook",
+             "speech":"You had reach end of test" 
+          },
+          {
+              "type": 2,
+              "platform": "facebook",
+              "title": "Do you want to Try some more test?",
+              "replies": [
+                "Goback",
+                "Exit"
+            
+             ]
+             }
+          ] 
+        }
+    except:
+        print(sys.exc_info()[0])
+        print(sys.exc_info()[1])
+        print(sys.exc_info()[2].tb_lineno)
 
 def getclassdetails(classdetails):
     print('inside class  function')
@@ -1238,6 +998,136 @@ def getAnswer(line):
     words3 = line.split("#")
     print('answer' + str(words3[6]))
     return int(words3[6])
+def classList():
+    classes = list();
+    classes.append("9")
+    classes.append("10")
+    classes.append("11")
+    classes.append("12")
+    return classes
+def subjectList():
+    classsubject = dict()
+    classsubject['7'] = "science"
+    classsubject['8'] = "science"
+    classsubject['9'] = "physics:chemistry:biology"
+    classsubject['10'] = "physics:chemistry:biology"
+    classsubject['11'] = "physics:chemistry:biology"
+    classsubject['12'] = "physics:chemistry:biology"
+    return classsubject
+def getChapterList():
+    classsubjectchapter =dict()
+    classsubjectchapter['class9physics'] = "1:2:4"
+    classsubjectchapter['class9chemistry'] = "3:5:6"
+    classsubjectchapter['class9biology'] = "7:10:11"
+    classsubjectchapter['class10physics'] = "1:2:4"
+    classsubjectchapter['class10chemistry'] = "3:5:6"
+    classsubjectchapter['class10biology'] = "7:10:11"
+    classsubjectchapter['class11physics'] = "1:2:4"
+    classsubjectchapter['class11chemistry'] = "3:5:6"
+    classsubjectchapter['class11biology'] = "7:10:11"
+    classsubjectchapter['class8science'] = "1:2:3:4:5:6:7:8:9:10:11:12:13:14"
+    classsubjectchapter['class7science'] = "1:2:3:4:5:6:7:8:9:10:11:12:13:14"
+    return classsubjectchapter
+def getChapterNameNumber():
+    chaptername = dict()
+    chaptername['chapter1'] ='1'
+    chaptername['chapter2'] ='2'
+    return chaptername
+def log(msg):
+    print (msg)
+    sys.stdout.flush()
+def getclass1(req):
+    result = req.get("result")
+    sessionID = req.get("sessionId")
+    contexts = result.get("contexts")
+    classes = list();
+    classes = classList()
+
+    #return getclassdetails(str(classes)[1:-1])
+    #print(str(json.dumps(classes))[1:-1])
+    return getclassdetails(classes)
+
+def getsubject(req):
+    print('get subject')
+    result = req.get("result")
+    sessionID = req.get("sessionId")
+    contexts = result.get("contexts")
+    classsubject = dict()
+    classsubject = subjectList()
+    classnumber ='8'
+    try:
+        print(result.get('parameters'))
+        classnumber = result.get('parameters')['class']
+        print( classnumber)
+        print(json.dumps(classsubject[classnumber].split(":")))
+
+        return getsubjectdetails(classnumber, classsubject[classnumber].split(":"))
+    except:
+        print(sys.exc_info()[0])
+        print(sys.exc_info()[1])
+        print(sys.exc_info()[2].tb_lineno)    
+    
+
+def getchapter(req):
+    print('get chapter')
+    result = req.get("result")
+    sessionID = req.get("sessionId")
+    contexts = result.get("contexts")
+    classsubjectchapter =dict()
+    classsubjectchapter = getChapterList()
+
+
+    classnumber ='8'
+    subject= ''
+    print(result.get('parameters'))
+    result1=''
+    try:
+        classnumber = result.get('parameters')['class']
+        subject = result.get('parameters')['subject']
+
+        te = 'class' + classnumber + subject
+
+        if int(classnumber) < 9:
+            result1 = getchapterlessthan8(classnumber, subject, "Send Text Message: " + classsubjectchapter[te].split(":"))
+            #print("Send Text Message: " + str(classsubjectchapter[te].split(":"))[1:-1])
+        else:
+            result1 = getchapterdetails(classnumber, subject, classsubjectchapter[te].split(":"))
+            #print(str(classsubjectchapter[te].split(":"))[1:-1])
+    except:
+        print(sys.exc_info()[0])
+        print(sys.exc_info()[1])
+        print(sys.exc_info()[2].tb_lineno)    
+    return result1
+def gettestpaper1(req):
+    print('get testpaper')
+    result = req.get("result")
+    sessionID = req.get("sessionId")
+    contexts = result.get("contexts")
+    classnumber = result.get('parameters')['class']
+    subject = result.get('parameters')['subject']
+    chapter = result.get('parameters')['chapter']
+    result2 =''
+    try:
+        result2 = gettestpaper(classnumber,subject,chapter,"Enter Test Number")
+    except:
+        print(sys.exc_info()[0])
+        print(sys.exc_info()[1])
+        print(sys.exc_info()[2].tb_lineno)
+    return result2
+def random_line(fname):
+    lines = open(fname).read().splitlines()
+    return random.choice(lines)
+
+def readLine(file_name,contextName):
+    fp = open(file_name)
+    for i, line in enumerate(fp):
+        if i == string.replace(string.replace(contextName,"q",""),"Q",""):
+            # 26th line
+            return line
+            #questiontext
+            #answer = words2[3]
+            break
+    fp.close()
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
 

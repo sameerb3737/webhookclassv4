@@ -59,8 +59,6 @@ def makeWebhookResult(req):
         return getsubject(req)
     if req.get("result").get("action") == "getchapter":
         return getchapter(req)
-    if req.get("result").get("action") == "gettestpaper":
-        return gettestpaper1(req)
     if req.get("result").get("action") != "shipping.cost":
         return {}
     result = req.get("result")
@@ -69,10 +67,10 @@ def makeWebhookResult(req):
     log('step1')
     
     chapternumber ='1'
-    testpaper = 1
-    currentquestion  =1	
-    previousquestion =1
-    previousAnswer =1
+
+    currentsentence  =1	
+    previoussentence =1
+    previousAnswer ='More'
 
     contexts = result.get("contexts")
     contextName = contexts[0].get("name")
@@ -81,25 +79,22 @@ def makeWebhookResult(req):
     a = list()
     a = getData2(contexts)
     print (a)
-    marks = 0
+
     classnumber = a['class']
     subject = a['subject']
     chapternumber =a['chapternumber']
-    testpaper =a['testpaper']
-    currentquestion =a['currentquestion']
-    previousquestion =a['previousquestion']
+
+    currentsentence =a['currentsentence']
+    previoussentence =a['previoussentence']
     previousAnswer =int(a['previousAnswer'])
-    marks = a['marks']
+
     #parameters = result.get("parameters")
     #useranswer = parameters.get("answer")
     
     
     correctIncorrectMessage =""
-    QuestionText = "Sample Question"
-    Option1 ="Option1"
-    Option2 ="Option2"
-    Option3 ="Option3"
-    Option4 ="OPtion3"
+    sentenceText = "Sample sentence"
+
     
     log('step3')
 
@@ -121,46 +116,43 @@ def makeWebhookResult(req):
     
     log('step3.1')
     Respondedanswer  = previousAnswer
-    difference = 0
-    difference = currentquestion - previousquestion
+
     log('step4')
-    if ( difference == 1) and (currentquestion > 1):
-        log('inside if')
-        temp= previousquestion-1
-        RightAnswer = getAnswer(myobjectx.testpaper[testpaper][temp])
-        if Respondedanswer ==  RightAnswer:
-            marks =marks+1
-            correctIncorrectMessage = "Great! Correct Answer " + "! Your marks:" + str(marks)
-        else:
-            correctIncorrectMessage = "Oops! " + "Correct Answer is " + str(RightAnswer) + ". " + "Your marks:" + str(marks)
-    log('step6')
-    if ( currentquestion > 31):
-        return FinalMessage(correctIncorrectMessage,currentquestion,previousquestion)
-    temp1= currentquestion-1
-    line= myobjectx.testpaper[testpaper][temp1]
+
+    if ( currentsentence > 31):
+
+
+
+    try:
+        temp1= currentsentence-1
+        line= myobjectx.testpaper[temp1]
+    except IndexError:
+        return FinalMessage("End of Topics",currentsentence,previoussentence)        
+    except:
+        print(sys.exc_info()[0])
+        print(sys.exc_info()[1])
+        print(sys.exc_info()[2].tb_lineno)
+	
+    message = ''
+    url =''
     log('step7')
-    #line= "15#Question15#Option1#Option2#Option3#Option4#2" 			
-    words3 = line.split("#")
-    QuestionText = words3[1]
-    Option1 = words3[2]
-    Option2 = words3[3]
-    Option3 = words3[4]
-    Option4 = words3[5]
+    if ( '.jpg' in line or 'jpeg' in line):
+        url = line
+    else:
+        message = line
+
 
     cost = {'Europe':100, 'North America':200, 'South America':300, 'Asia':400, 'Africa':500}
     var5	="          \"type\": 0,	"
     var6	="          \"platform\": \"facebook\",	"
-    var7	="          \"speech\": \"Question Text1\"	"
+    var7	="          \"speech\": \"sentence Text1\"	"
     speech = "HELLO"
     speech1 = var5 + var6  + var7
     
     log('before response')
     print("Response:")
-    #print(speech1)
-    #"contextOut": [],
-    #print(str(sessionID) + "#" + str(chapternumber) + "#" + str(testpaper) + "#" + previousquestion + "#" + correctIncorrectMessage)
-    print(correctIncorrectMessage + "#" + str(QuestionText) + "#" + str(Option1) + "#" + Option2 + "#" + Option3)
-    return ReturnWebHookResponse(correctIncorrectMessage,QuestionText,Option1,Option2,Option3,Option4,currentquestion,previousquestion,marks,classnumber,subject,chapternumber,testpaper)
+
+    return ReturnWebHookRevisionResponse(message,url,currentsentence,previoussentence,classnumber,subject,chapternumber)
 
 
 def getData2(contexts):
@@ -178,7 +170,7 @@ def getData2(contexts):
             for key in  all_keys:
             
                 if isinstance(input[key],str):
-                    if 'q' in input[key]:
+                    if 's' in input[key]:
                         contextnames.append(input[key])
                 else:
                     if isinstance(input[key],int):
@@ -190,49 +182,42 @@ def getData2(contexts):
             
         chapternumber ='1'
         testpaper =1
-        currentquestion=1
-        previousquestion=0
-        previousAnswer =1
+        currentsentence=1
+        previoussentence=0
+        previousAnswer ='1'
     
         print (contextnames)
         print (lifespan)
         print(parameters)
-        questionarray=[0,0]
+        sentencearray=[0,0]
         c=0
         for x in range(len(contextnames)):
             if 'chapter' in contextnames[x] and lifespan[x] ==5:
                 chapternumber= contextnames[x].replace('chapter','')
             if 'testpaper' in contextnames[x] and lifespan[x] ==5:
                 testpaper = contextnames[x].replace('testpaper','')
-            if len(contextnames) ==1 and 'q' in contextnames[x] and lifespan[x] ==5:
-                currentquestion = contextnames[x].replace('q','')
+            if len(contextnames) ==1 and 's' in contextnames[x] and lifespan[x] ==5:
+                currentsentence = contextnames[x].replace('q','')
         
-            if len(contextnames) >1 and 'q' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
+            if len(contextnames) >1 and 's' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
             
-                questionarray[c] = int(contextnames[x].replace('q',''))
+                sentencearray[c] = int(contextnames[x].replace('s',''))
                 c= c+1
             
     
-        print(questionarray) 
+        print(sentencearray) 
         if len(contextnames) > 1:
             indexpara= 0
             indexpara = len(contextnames) -1
             print(indexpara)
-            currentquestion =  max(questionarray)
-            previousquestion = currentquestion - 1
+            currentsentence =  max(sentencearray)
+            previoussentence = currentsentence - 1
             previousAnswer = int(parameters[indexpara]['answer'])
         else:
-            previousquestion = min(questionarray)
+            previoussentence = min(sentencearray)
             previousAnswer = 0
         print('before dict')       
-        marks = 0
-        try:
-            if len(contextnames) > 1:
-                marks = int(parameters[0]['marks'])
-            else:
-                marks =0
-        except:
-            marks = 0
+
     
         if len(contextnames) > 1:
             indexpara= 0
@@ -241,26 +226,25 @@ def getData2(contexts):
                 d['class'] =int(parameters[indexpara]['class'])
                 d['subject'] =parameters[indexpara]['subject']		
                 d['chapternumber'] =parameters[indexpara]['chapter']
-                d['testpaper'] =int(parameters[indexpara]['testpaper'])
+
             except:
                 indexpara= 1
                 d['class'] =int(parameters[indexpara]['class'])
                 d['subject'] =parameters[indexpara]['subject']		
                 d['chapternumber'] =parameters[indexpara]['chapter']
-                d['testpaper'] =int(parameters[indexpara]['testpaper'])
-            d['currentquestion'] =int(currentquestion)
-            d['previousquestion'] =int(previousquestion)
-            d['previousAnswer'] = int(previousAnswer)
-            d['marks'] = int(marks)
+
+            d['currentsentence'] =int(currentsentence)
+            d['previoussentence'] =int(previoussentence)
+            d['previousAnswer'] = previousAnswer
+
         if len(contextnames) == 1:
             d['class'] =int(parameters[0]['class'])
             d['subject'] =parameters[0]['subject']		
             d['chapternumber'] =parameters[0]['chapter']
-            d['testpaper'] =int(parameters[0]['testpaper'])
-            d['currentquestion'] =int(currentquestion)
-            d['previousquestion'] =int(previousquestion)
-            d['previousAnswer'] = int(previousAnswer)
-            d['marks'] = int(marks)
+            d['currentsentence'] =int(currentsentence)
+            d['previoussentence'] =int(previoussentence)
+            d['previousAnswer'] = previousAnswer
+
     except:
         print(sys.exc_info()[0])
         print(sys.exc_info()[1])
@@ -279,31 +263,31 @@ def getChapterObject2(classnumber,subject,chapter):
     return obj
 	
 
-def ReturnWebHookVideoResponse(url,currentquestion,previousquestion,classnumber,subject,chapter):
+def ReturnWebHookVideoResponse(url,currentsentence,previoussentence,classnumber,subject,chapter):
     print('inside response function')
-    if currentquestion == 1:
-        currentquestion = currentquestion +1
-        previousquestion = previousquestion + 1
+    if currentsentence == 1:
+        currentsentence = currentsentence +1
+        previoussentence = previoussentence + 1
 	
     return {
     "contextOut": [
     {
-	  "name": "s" + str(currentquestion) ,
+	  "name": "s" + str(currentsentence) ,
           "parameters": {
 
 	      "class": str(classnumber),
           "subject": subject,
-          "chapter": str(chapter)                 
+          "chapter": str(chapter)               
           },
           "lifespan": 5
      },
      {
-	  "name": "s" + str(previousquestion) ,
+	  "name": "s" + str(previoussentence) ,
           "parameters": {
-
-     	  "class": str(classnumber),
+  
+	  "class": str(classnumber),
           "subject": subject,
-          "chapter": str(chapter)                 
+          "chapter": str(chapter)               
           },
            "lifespan": 0
      },
@@ -311,9 +295,9 @@ def ReturnWebHookVideoResponse(url,currentquestion,previousquestion,classnumber,
 	  "name": "t3" ,
           "parameters": {
 
-	     "class": str(classnumber),
+	  "class": str(classnumber),
           "subject": subject,
-          "chapter": str(chapter)            
+          "chapter": str(chapter)              
           },
            "lifespan": 0
      }	    
@@ -344,25 +328,144 @@ def ReturnWebHookVideoResponse(url,currentquestion,previousquestion,classnumber,
     "size": 1728614,  
     "duration": 20  
         }  
-    }
+    },
+
+      {
+         "type":3,
+         "platform":"facebook",
+         "imageUrl":url
+      },
+      {
+         "type":3,
+         "platform":"slack",
+         "imageUrl":url
+      },
+      {
+         "type":3,
+         "platform":"skype",
+         "imageUrl":url
+      },
+      {
+         "type":3,
+         "platform":"viber",
+         "imageUrl":url
+      },
+      {
+         "type":3,
+         "platform":"kik",
+         "imageUrl":url
+      },
+      {
+         "type":3,
+         "platform":"telegram",
+         "imageUrl":url
+      },
+      {
+         "type":0,
+         "platform":"facebook",
+         "speech": message 
+      },
+      
+      {
+          "type": 2,
+          "platform": "facebook",
+          "title": "Choose the Right Answer",
+          "replies": [
+            "More",
+            "Exit"
+          ]
+     },
+      {
+         "type":0,
+         "platform":"slack",
+         "speech": message 
+      },
+      {
+          "type": 2,
+          "platform": "slack",
+          "title": "Choose the Right Answer",
+          "replies": [
+            "More",
+            "Exit"
+          ]
+     },
+      {
+         "type":0,
+         "platform":"skype",
+         "speech": message 
+      },
+ 
+      {
+          "type": 2,
+          "platform": "skype",
+          "title": "Choose the Right Answer",
+          "replies": [
+            "More",
+            "Exit"
+          ]
+     },
+      {
+         "type":0,
+         "platform":"viber",
+         "speech": message 
+      },
+      {
+          "type": 2,
+          "platform": "viber",
+          "title": "Choose the Right Answer",
+          "replies": [
+            "More",
+            "Exit"
+          ]
+     },
+      {
+         "type":0,
+         "platform":"kik",
+         "speech": message 
+      },
+      {
+          "type": 2,
+          "platform": "kik",
+          "title": "Choose the Right Answer",
+          "replies": [
+            "More",
+            "Exit"
+          ]
+     },
+      {
+         "type":0,
+         "platform":"telegram",
+         "speech": message 
+      },
+ 
+      {
+          "type": 2,
+          "platform": "telegram",
+          "title": "Choose the Right Answer",
+          "replies": [
+           "More",
+           "Exit"
+          ]
+     }
+
 
    ]
 }
 
-def FinalMessage(correctIncorrectMessage,currentquestion,previousquestion):
+def FinalMessage(correctIncorrectMessage,currentsentence,previoussentence):
     print(correctIncorrectMessage)
     try:
         return  {
         "contextOut": [
         {
-	  "name": "q" + str(currentquestion) ,
+	  "name": "s" + str(currentsentence) ,
           "parameters": {
                  
           },
           "lifespan": 0
         },
         {
-	  "name": "q" + str(previousquestion) ,
+	  "name": "s" + str(previoussentence) ,
           "parameters": {
                    
           },
@@ -377,11 +480,6 @@ def FinalMessage(correctIncorrectMessage,currentquestion,previousquestion):
              "speech": correctIncorrectMessage 
           },
           {
-             "type":0,
-             "platform":"facebook",
-             "speech":"You had reach end of test" 
-          },
-          {
               "type": 2,
               "platform": "facebook",
               "title": "Do you want to Try some more test?",
@@ -391,6 +489,69 @@ def FinalMessage(correctIncorrectMessage,currentquestion,previousquestion):
             
              ]
              }
+          ,
+         {
+             "type":0,
+             "platform":"slack",
+             "speech": correctIncorrectMessage 
+          },
+          {
+              "type": 2,
+              "platform": "slack",
+              "title": "Do you want to Try some more test?",
+              "replies": [
+                "Goback",
+                "Exit"
+            
+             ]
+             },
+	  {
+             "type":0,
+             "platform":"kik",
+             "speech": correctIncorrectMessage 
+          },
+          {
+              "type": 2,
+              "platform": "kik",
+              "title": "Do you want to Try some more test?",
+              "replies": [
+                "Goback",
+                "Exit"
+            
+             ]
+             },
+         {
+             "type":0,
+             "platform":"viber",
+             "speech": correctIncorrectMessage 
+          },
+          {
+              "type": 2,
+              "platform": "viber",
+              "title": "Do you want to Try some more test?",
+              "replies": [
+                "Goback",
+                "Exit"
+            
+             ]
+             },
+         {
+             "type":0,
+             "platform":"skype",
+             "speech": correctIncorrectMessage 
+          },
+          {
+              "type": 2,
+              "platform": "skype",
+              "title": "Do you want to Try some more test?",
+              "replies": [
+                "Goback",
+                "Exit"
+            
+             ]
+             }
+
+	
           ] 
         }
     except:
@@ -894,7 +1055,7 @@ def readLine(file_name,contextName):
         if i == string.replace(string.replace(contextName,"q",""),"Q",""):
             # 26th line
             return line
-            #questiontext
+            #sentencetext
             #answer = words2[3]
             break
     fp.close()

@@ -164,7 +164,7 @@ def makeWebhookResult(req):
     
     log('step1')
     
-    chapternumber =1
+    chapternumber ='1'
     testpaper = 1
     currentquestion  =1	
     previousquestion =1
@@ -204,7 +204,16 @@ def makeWebhookResult(req):
     #chapterContext = "chapter1"
     myobjectx = chapter1()
     log('before getChapterObject2')
-    myobjectx = getChapterObject2(classnumber,subject,chapternumber)
+    #chapter name and number map  insert here
+    chaptername = dict()
+    chaptername['chapter1'] ='1'
+    chaptername['chapter2'] ='2'
+    tempvar = ''
+    try:
+        tempvar = chaptername[chapternumber]
+    except:
+        tempvar ='1'
+    myobjectx = getChapterObject2(classnumber,subject,tempvar)
     
     log('step3.1')
     Respondedanswer  = previousAnswer
@@ -392,7 +401,7 @@ def getData2(contexts):
                     
     
             
-        chapternumber =1
+        chapternumber ='1'
         testpaper =1
         currentquestion=1
         previousquestion=0
@@ -444,13 +453,13 @@ def getData2(contexts):
             try:
                 d['class'] =int(parameters[indexpara]['class'])
                 d['subject'] =parameters[indexpara]['subject']		
-                d['chapternumber'] =int(parameters[indexpara]['chapter'])
+                d['chapternumber'] =parameters[indexpara]['chapter']
                 d['testpaper'] =int(parameters[indexpara]['testpaper'])
             except:
                 indexpara= 1
                 d['class'] =int(parameters[indexpara]['class'])
                 d['subject'] =parameters[indexpara]['subject']		
-                d['chapternumber'] =int(parameters[indexpara]['chapter'])
+                d['chapternumber'] =parameters[indexpara]['chapter']
                 d['testpaper'] =int(parameters[indexpara]['testpaper'])
             d['currentquestion'] =int(currentquestion)
             d['previousquestion'] =int(previousquestion)
@@ -459,7 +468,7 @@ def getData2(contexts):
         if len(contextnames) == 1:
             d['class'] =int(parameters[0]['class'])
             d['subject'] =parameters[0]['subject']		
-            d['chapternumber'] =int(parameters[0]['chapter'])
+            d['chapternumber'] =parameters[0]['chapter']
             d['testpaper'] =int(parameters[0]['testpaper'])
             d['currentquestion'] =int(currentquestion)
             d['previousquestion'] =int(previousquestion)

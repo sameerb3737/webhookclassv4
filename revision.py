@@ -435,14 +435,14 @@ def FinalMessage(correctIncorrectMessage,currentsentence,previoussentence):
         return  {
         "contextOut": [
         {
-	  "name": "q" + str(currentsentence) ,
+	  "name": "s" + str(currentsentence) ,
           "parameters": {
                  
           },
           "lifespan": 0
         },
         {
-	  "name": "q" + str(previoussentence) ,
+	  "name": "s" + str(previoussentence) ,
           "parameters": {
                    
           },
@@ -457,11 +457,6 @@ def FinalMessage(correctIncorrectMessage,currentsentence,previoussentence):
              "speech": correctIncorrectMessage 
           },
           {
-             "type":0,
-             "platform":"facebook",
-             "speech":"You had reach end of test" 
-          },
-          {
               "type": 2,
               "platform": "facebook",
               "title": "Do you want to Try some more test?",
@@ -471,6 +466,69 @@ def FinalMessage(correctIncorrectMessage,currentsentence,previoussentence):
             
              ]
              }
+          ,
+         {
+             "type":0,
+             "platform":"slack",
+             "speech": correctIncorrectMessage 
+          },
+          {
+              "type": 2,
+              "platform": "slack",
+              "title": "Do you want to Try some more test?",
+              "replies": [
+                "Goback",
+                "Exit"
+            
+             ]
+             },
+	  {
+             "type":0,
+             "platform":"kik",
+             "speech": correctIncorrectMessage 
+          },
+          {
+              "type": 2,
+              "platform": "kik",
+              "title": "Do you want to Try some more test?",
+              "replies": [
+                "Goback",
+                "Exit"
+            
+             ]
+             },
+         {
+             "type":0,
+             "platform":"viber",
+             "speech": correctIncorrectMessage 
+          },
+          {
+              "type": 2,
+              "platform": "viber",
+              "title": "Do you want to Try some more test?",
+              "replies": [
+                "Goback",
+                "Exit"
+            
+             ]
+             },
+         {
+             "type":0,
+             "platform":"skype",
+             "speech": correctIncorrectMessage 
+          },
+          {
+              "type": 2,
+              "platform": "skype",
+              "title": "Do you want to Try some more test?",
+              "replies": [
+                "Goback",
+                "Exit"
+            
+             ]
+             }
+
+	
           ] 
         }
     except:

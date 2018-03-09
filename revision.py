@@ -94,10 +94,7 @@ def makeWebhookResult(req):
     
     correctIncorrectMessage =""
     sentenceText = "Sample sentence"
-    Option1 ="Option1"
-    Option2 ="Option2"
-    Option3 ="Option3"
-    Option4 ="OPtion3"
+
     
     log('step3')
 

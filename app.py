@@ -177,7 +177,7 @@ def getData2(contexts):
     
             
         chapternumber ='1'
-        testpaper =1
+
         currentsentence=1
         previoussentence=0
         previousAnswer ='1'
@@ -193,7 +193,7 @@ def getData2(contexts):
             if 'testpaper' in contextnames[x] and lifespan[x] ==5:
                 testpaper = contextnames[x].replace('testpaper','')
             if len(contextnames) ==1 and 's' in contextnames[x] and lifespan[x] ==5:
-                currentsentence = contextnames[x].replace('q','')
+                currentsentence = contextnames[x].replace('s','')
         
             if len(contextnames) >1 and 's' in contextnames[x] and (lifespan[x] ==5 or lifespan[x] ==4):
             
@@ -211,7 +211,7 @@ def getData2(contexts):
             previousAnswer = int(parameters[indexpara]['answer'])
         else:
             previoussentence = min(sentencearray)
-            previousAnswer = 0
+            previousAnswer = ''
         print('before dict')       
 
     

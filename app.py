@@ -119,10 +119,6 @@ def makeWebhookResult(req):
 
     log('step4')
 
-    if ( currentsentence > 31):
-
-
-
     try:
         temp1= currentsentence-1
         line= myobjectx.testpaper[temp1]
